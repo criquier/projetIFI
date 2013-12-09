@@ -3,10 +3,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ifi.model.Article;
 import com.ifi.model.User;
 import com.ifi.repositories.UserRepository;
 
@@ -17,7 +21,19 @@ public class UserController {
 		@Autowired
 		private UserRepository repository;
 		
-		
+	
+	    @RequestMapping(value="/inscription", method=RequestMethod.GET)
+	    public String ajouterArticleFormulaire(Model model){
+		model.addAttribute("user", new User());
+		return "inscription";
+	    }
+	    
+	    @RequestMapping(value="/enregistrementUser", method=RequestMethod.POST)
+	    public String ajouterArticleAfficher(@ModelAttribute User user, Model model) {
+	         model.addAttribute("user", user);
+	         repository.save(user);
+	        return "inscriptionValider";
+	    }
 		
 		@RequestMapping("/save")
 		public @ResponseBody String save( @RequestParam(value="loggin", required=true) String loggin,
