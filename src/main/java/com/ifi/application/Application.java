@@ -2,8 +2,6 @@ package com.ifi.application;
 
 import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.H2;
 
-import java.util.List;
-
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -24,9 +22,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.ifi.model.User;
 import com.ifi.repositories.ArticleRepository;
-import com.ifi.repositories.userRepository;
+import com.ifi.repositories.UserRepository;
+import com.ifi.utils.Utils;
 
 @Configuration
 @EnableJpaRepositories
@@ -63,8 +61,8 @@ public class Application {
         return new JpaTransactionManager(entityManagerFactory);
     }
     @Bean
-    public userRepository userrepository(){
-    	return new userRepository();
+    public UserRepository userrepository(){
+    	return new UserRepository();
     }
     
     @Bean
@@ -77,15 +75,7 @@ public class Application {
     	// SpringApplication.run(Application.class, args);
     	 System.out.println("--------------Thierno saidou-------------------");
     	 ApplicationContext context = SpringApplication.run(Application.class, args);
-    	  userRepository repository = context.getBean(userRepository.class);
-    	  repository.save(new User("thierno", "Barry"));
-    	  List<User> users = (List<User>) repository.findAll();
-          System.out.println("Customers found with findAll():");
-          System.out.println("-------------------------------");
-          for (User user : users) {
-              System.out.println(user.getId()+" "+user.getLoggin()+" "+user.getPassword());
-          }
-          System.out.println();
+    	 Utils.fillDataBase(context);
        
 
         //context.close();

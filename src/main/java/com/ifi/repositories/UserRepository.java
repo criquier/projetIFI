@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ifi.model.User;
+
+
 @Repository
 @Transactional
-	public class userRepository  {
+	public class UserRepository  {
 		@PersistenceContext
 		private EntityManager entityManager;
 		

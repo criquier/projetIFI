@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Article</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--  <link rel="stylesheet" href="mycss.css" th:href="@{mycss.css}" /> -->
+</head>
+<body>
+	<h1>Création d'Article</h1>
+    <form action="#" th:action="@{/ajouterArticle}" th:object="${article}" method="post">
+    	<!-- <p>Id: <input type="text" th:field="*{id}" /></p>-->
+        <p>Titre: <input type="text" th:field="*{titre}" /></p>
+         <p>Date: <input type="text" th:field="*{date}" /></p>
+         <p>Contenu:</p>
+         <textarea th:field="*{contenu}"></textarea>
+         <!--   <p>Auteur: <input type="text" th:field="*{auteurs}" /></p> -->
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>
