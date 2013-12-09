@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ifi.model.User;
-import com.ifi.repositories.userRepository;
+import com.ifi.repositories.UserRepository;
 
 @Controller
 public class UserController {
 	
 		
 		@Autowired
-		private userRepository repository;
+		private UserRepository repository;
 		
 		
 		
@@ -40,17 +40,14 @@ public class UserController {
 		
 		@RequestMapping("/tous")
 		public @ResponseBody String readAll(){
-			StringBuilder builder=new StringBuilder();
+			String builder = new String();
 			List<User> users=repository.findAll();
-			builder.append("-----------------Liste Users----------------------------------");
-			builder.append("\n");
+			builder = "-----------------Liste Users----------------------------------"+System.getProperty("line.separator");
+			
 			for (User user : users) {
-				builder.append(user.toString());
-				builder.append("\n");
-				
+				builder += user.toString().concat("\n");
 	          }
-	  
-	          return builder.toString()+"\n";
+	          return builder;
 		}
 	
 
