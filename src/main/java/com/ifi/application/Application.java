@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.ifi.model.User;
 import com.ifi.repositories.ArticleRepository;
 import com.ifi.repositories.UserRepository;
+import com.ifi.utils.outils;
 
 @Configuration
 @EnableJpaRepositories
@@ -77,15 +78,7 @@ public class Application {
     	// SpringApplication.run(Application.class, args);
     	 System.out.println("--------------Thierno saidou-------------------");
     	 ApplicationContext context = SpringApplication.run(Application.class, args);
-    	  UserRepository repository = context.getBean(UserRepository.class);
-    	  repository.save(new User("thierno", "Barry"));
-    	  List<User> users = (List<User>) repository.findAll();
-          System.out.println("Customers found with findAll():");
-          System.out.println("-------------------------------");
-          for (User user : users) {
-              System.out.println(user.getId()+" "+user.getLoggin()+" "+user.getPassword());
-          }
-          System.out.println();
+    	 outils.fillDataBase(context);
        
 
         //context.close();
