@@ -11,6 +11,12 @@
      <p th:text="'Contenu: ' + ${article.contenu}" />
      <p th:text="'Date: ' + ${article.date}" />
      
-    <a href="/ajouterArticle">Submit another article</a>
+     
+     <form action="#" th:action="@{/ajouterCommentaire}" th:object="${commentaire}" method="post">
+    	 <p>Commenter:</p>
+         <textarea th:field="*{contenu}"></textarea>
+         <p><input type="submit" value="publier" /></p>
+    </form>
+    
 </body>
 </html>
