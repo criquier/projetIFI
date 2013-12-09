@@ -14,7 +14,7 @@ public class Utils {
 	public static void fillDataBase(ApplicationContext context){
 		
 		// creation des utilisateur 
-		UserRepository repository = context.getBean(UserRepository.class);
+	  UserRepository repository = context.getBean(UserRepository.class);
   	  repository.save(new User("thierno", "Barry"));
   	  repository.save(new User("maxime", "Gens"));
   	  repository.save(new User("benjamin", "Flahauw"));

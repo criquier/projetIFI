@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Article</title> 
+    <title>Accueil du Blog</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       
 </head>
@@ -9,9 +9,11 @@
 	<h1>Bienvenue sur notre blog</h1>
 	<p><a href="/">Acceuil</a></p>
 	<p><a href="/ajouterArticle">Ajouter Article</a></p>
-    <h5>liste des Articles Disponibles sur le Site</h5>
+	<p><a href="/inscription">S'incrire</a></p>
+
     
-    <table>
+    <table border="1">
+    <caption>liste des Articles sur le Site</caption>
     	<tr>
     		<th>Titre</th>
     		<th>Date de publication</th>
@@ -20,6 +22,20 @@
 			<td th:text="${article.titre}">titre</td>
 			<td th:text="${article.date}">date</td>
 			<td th:text="${article.contenu}">contenu</td>
+		</tr>
+	</table>
+	
+	
+	<table border="1">
+	   <caption>liste des utilisateurs</caption>
+    	<tr>
+    		<th>Id</th>
+    		<th>Login</th>
+			<th>Mot de passe</th>
+			</tr><tr th:each="user: ${users}">
+<!-- 			<td th:text="${user.id}">Id</td> -->
+			<td th:text="${user.loggin}">Login</td>
+			<td th:text="${user.password}">Mot de passe</td>
 		</tr>
 	</table>
     

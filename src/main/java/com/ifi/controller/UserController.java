@@ -23,15 +23,16 @@ public class UserController {
 		
 	
 	    @RequestMapping(value="/inscription", method=RequestMethod.GET)
-	    public String ajouterArticleFormulaire(Model model){
+	    public String inscriptionUser(Model model){
 		model.addAttribute("user", new User());
 		return "inscription";
 	    }
 	    
 	    @RequestMapping(value="/enregistrementUser", method=RequestMethod.POST)
-	    public String ajouterArticleAfficher(@ModelAttribute User user, Model model) {
+	    public String validationInscriptionUser(@ModelAttribute User user, Model model) {
 	         model.addAttribute("user", user);
 	         repository.save(user);
+
 	        return "inscriptionValider";
 	    }
 		
