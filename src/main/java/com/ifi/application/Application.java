@@ -25,6 +25,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.ifi.model.User;
+import com.ifi.repositories.ArticleRepository;
 import com.ifi.repositories.userRepository;
 
 @Configuration
@@ -65,7 +66,11 @@ public class Application {
     public userRepository userrepository(){
     	return new userRepository();
     }
-
+    
+    @Bean
+    public ArticleRepository articleRepository(){
+    	return new ArticleRepository();
+    }
 
     public static void main(String[] args) {
        // AbstractApplicationContext context = new AnnotationConfigApplicationContext(Application.class,args);

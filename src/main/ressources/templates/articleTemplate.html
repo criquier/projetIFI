@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Article</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Affiche Article</h1>
+    <!--  <p th:text="'id: ' + ${article.id}" />  -->
+    <p th:text="'Titre: ' + ${article.titre}" />
+     <p th:text="'Contenu: ' + ${article.contenu}" />
+     <p th:text="'Date: ' + ${article.date}" />
+     
+    <a href="/ajouterArticle">Submit another article</a>
+</body>
+</html>
