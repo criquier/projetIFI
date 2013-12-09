@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Article</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+</head>
+<body>
+	<h1>Bienvenue sur notre blog</h1>
+	<p><a href="/">Acceuil</a></p>
+	<p><a href="/ajouterArticle">Ajouter Article</a></p>
+    <h5>liste des Articles Disponibles sur le Site</h5>
+    
+    <table>
+    	<tr>
+    		<th>Titre</th>
+    		<th>Date de publication</th>
+			<th>Contenu</th>
+			</tr><tr th:each="article: ${articles}">
+			<td th:text="${article.titre}">titre</td>
+			<td th:text="${article.date}">date</td>
+			<td th:text="${article.contenu}">contenu</td>
+		</tr>
+	</table>
+    
+</body>
+</html>

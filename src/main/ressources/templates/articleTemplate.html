@@ -10,13 +10,15 @@
     <p th:text="'Titre: ' + ${article.titre}" />
      <p th:text="'Contenu: ' + ${article.contenu}" />
      <p th:text="'Date: ' + ${article.date}" />
+     <p><a href="/ajouterArticle">ajouter article</a></p>
+     <p><a href="/">Index</a></p>
      
-     
-     <form action="#" th:action="@{/ajouterCommentaire}" th:object="${commentaire}" method="post">
+     <!--  <form action="#" th:action="@{/ajouterCommentaire}" th:object="${commentaire}" method="post">
     	 <p>Commenter:</p>
          <textarea th:field="*{contenu}"></textarea>
          <p><input type="submit" value="publier" /></p>
-    </form>
+         
+    </form> -->
     
 </body>
 </html>
