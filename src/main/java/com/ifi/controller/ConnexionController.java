@@ -27,7 +27,12 @@ public class ConnexionController {
     	try {
     		if(repository.existUser(user.getLoggin()) == true){
     			User userFind = repository.findByLoggin(user.getLoggin());
-    			model.addAttribute("userconnecter", userFind);
+    			if(userFind.getPassword().equals(user.getPassword()))
+    				model.addAttribute("userconnecter", userFind);
+    			else{
+    				model.addAttribute("message_error", msg_error);
+    				return "connexion";
+    			}
     		}
 		} catch (Exception e) {
 			model.addAttribute("message_error", msg_error);
