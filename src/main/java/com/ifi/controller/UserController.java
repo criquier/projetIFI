@@ -33,7 +33,7 @@ public class UserController {
 	    	String message_error = new String("Ce login existe deja");
 	    	if(!user.getLoggin().equals("") && !user.getPassword().equals("")) 
 		    	if(repository.existUser(user.getLoggin())==true){
-		    		System.out.println("tring validationInscriptionUser-------- Login existe deja-------");
+		    		System.out.println("String validationInscriptionUser-------- Login existe deja-------");
 		    		User u = new User();
 		    		model.addAttribute("message_error", message_error);
 		    		model.addAttribute("user", u);
@@ -59,15 +59,38 @@ public class UserController {
 			return "saved";
 		}
 		
-		@RequestMapping("/user")
-		public @ResponseBody String index( @RequestParam(value="loggin", required=true) String loggin)
+		@RequestMapping(value="/user/profil", method=RequestMethod.GET)
+		public String afficherUser( @RequestParam(value="id", required=true) String id, Model model)
 		{
-			User user =repository.findByLoggin(loggin);
-			StringBuilder builder=new StringBuilder();
-			if(user==null) return "User does not exist";
-			else
-			return builder.append(user.toString()).toString();
+			User user = repository.findOne(Long.parseLong(id));
+			if(user != null){
+				model.addAttribute("user", user);
+				return "userTemplate";
+			}else{
+				String message_error = new String("Erreur lors de la récupération de l'User");
+				model.addAttribute("message_error", message_error);
+				return "index";
+			}
 		}
+		
+		@RequestMapping(value="/user/profil/modifier", method=RequestMethod.POST)
+		public String modifierUser( @ModelAttribute User user, Model model)
+		{
+			long id = user.getId();
+				if(repository.update(user) == true){
+					User u = repository.findOne(id);
+					model.addAttribute("user", u);
+					return "userTemplate";
+				}else{
+					String message_error = new String("Impossible de mettre à jour vos informations");
+					model.addAttribute("message_error", message_error);
+					model.addAttribute("user", user);
+					return "userTemplate";
+				}
+			
+		}
+		
+		
 		
 		@RequestMapping("/tous")
 		public @ResponseBody String readAll(){

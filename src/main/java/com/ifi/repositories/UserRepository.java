@@ -57,9 +57,35 @@ import com.ifi.model.User;
 		
 		public User findOne(long l)
 		{
-			Query query = this.entityManager.createQuery("select u from User u where u.id=:id");
-			query.setParameter("id",l);
-			return (User) query.getSingleResult();
+			User user =null;
+			try {
+				Query query = this.entityManager.createQuery("select u from User u where u.id=:id");
+				query.setParameter("id",l);
+				user =  (User) query.getSingleResult();
+			} catch (Exception e) {
+				System.out.println("User findOne------------- User non trouve -------------");
+			}
+			 return user;
 			
 		}
+		
+		
+	    public boolean update(User user){
+	    	
+	    	try {
+	    	   User u= findOne(user.getId());
+	 	       u.setLoggin(user.getLoggin());
+	 	       u.setPassword(user.getPassword());
+	 	       this.entityManager.getTransaction().commit();
+	 	       return true;
+			} catch (Exception e) {
+				return false;
+			}
+	    }
+	   
+	    public void delete(long id){
+	        this.entityManager.remove(this.findOne(id));
+	    }
+		
+		
 	}

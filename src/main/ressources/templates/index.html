@@ -11,10 +11,10 @@
 	<p><a href="/ajouterArticle">Ajouter Article</a></p>
 	<p><a href="/inscription">S'incrire</a></p>
 	<div th:if="${userconnecter}"> 
-	   <p th:text="'Bienvenue ' + ${userconnecter.loggin}">userconnecter</p><a href="/user/modifie">Modifier son profil</a></div>
+	   <p th:text="'Bienvenue ' + ${userconnecter.loggin}">userconnecter</p><a href="/user/profil">Modifier son profil</a></div>
 	<p th:unless="${userconnecter}"><a href="/connexion">Se connecter</a></p>
 	
-    
+    <p th:if="${message_error}" th:text="${message_error}"></p>
     <table border="1">
     <caption>liste des Articles sur le Site</caption>
     	<tr>
@@ -36,8 +36,8 @@
     		<th>Login</th>
 			<th>Mot de passe</th>
 			</tr><tr th:each="user: ${users}">
-			<td th:text="${user.id}">Id</td>
-			<td th:text="${user.loggin}">Login</td>
+			<td th:text="${user.id}">id</td>
+			<td><a href ="userTemplate.html" th:href="@{/user/profil(id=${user.id})}"><span th:text="${user.loggin}"></span></a></td>
 			<td th:text="${user.password}">Mot de passe</td>
 		</tr>
 	</table>
