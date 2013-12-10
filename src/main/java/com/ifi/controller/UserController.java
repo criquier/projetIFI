@@ -31,18 +31,23 @@ public class UserController {
 	    @RequestMapping(value="/enregistrementUser", method=RequestMethod.POST)
 	    public String validationInscriptionUser(@ModelAttribute User user, Model model) {
 	    	String message_error = new String("Ce login existe deja");
-	    	System.out.println("-----"+user.getLoggin());
-	    	if(repository.existUser(user.getLoggin())==true){
-	    		System.out.println("tring validationInscriptionUser-------- Login existe deja-------");
-	    		User u = new User();
+	    	if(!user.getLoggin().equals("") && !user.getPassword().equals("")) 
+		    	if(repository.existUser(user.getLoggin())==true){
+		    		System.out.println("tring validationInscriptionUser-------- Login existe deja-------");
+		    		User u = new User();
+		    		model.addAttribute("message_error", message_error);
+		    		model.addAttribute("user", u);
+		    		return "inscription";
+		    	}else{
+					repository.save(user);
+					System.out.println("-------- Login existe pas-------");
+					model.addAttribute("user", user);
+					return "inscriptionValider";
+		    	}
+	    	else{
+	    		message_error = new String("Attention il y a un champs vide");
 	    		model.addAttribute("message_error", message_error);
-	    		model.addAttribute("user", u);
-	    		return "inscription";
-	    	}else{
-				repository.save(user);
-				System.out.println("-------- Login existe pas-------");
-				model.addAttribute("user", user);
-				return "inscriptionValider";
+				return "inscription";
 	    	}
 	    }
 		
