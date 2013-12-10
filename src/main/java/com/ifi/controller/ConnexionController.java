@@ -23,21 +23,18 @@ public class ConnexionController {
     
     @RequestMapping(value="/connexion", method=RequestMethod.POST)
     public String connexionValider(User user,Model model){
-    	String msg_error = new String("utilisateur non identifié");
-    	try {
-    		if(repository.existUser(user.getLoggin()) == true){
-    			User userFind = repository.findByLoggin(user.getLoggin());
-    			if(userFind.getPassword().equals(user.getPassword()))
-    				model.addAttribute("userconnecter", userFind);
-    			else{
-    				model.addAttribute("message_error", msg_error);
-    				return "connexion";
-    			}
-    		}
-		} catch (Exception e) {
-			model.addAttribute("message_error", msg_error);
-			return "connexion";
+    	String message_error = new String("Identifiant incorrect");
+
+		if(repository.existUser(user.getLoggin()) == true){
+			User userFind = repository.findByLoggin(user.getLoggin());
+			if(userFind.getPassword().equals(user.getPassword()))
+				model.addAttribute("userconnecter", userFind);
+			else{
+				model.addAttribute("message_error", message_error);
+				return "connexion";
+			}
 		}
+		
 		return "index";
     }   
 }

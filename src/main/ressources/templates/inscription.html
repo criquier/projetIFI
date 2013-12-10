@@ -6,6 +6,8 @@
 </head>
 <body>
 	<h1>Inscription</h1>
+	<p th:if="${message_error}" th:text="${message_error}">Login existe deja</p>
+	
     <form action="#" th:action="@{/enregistrementUser}" th:object="${user}" method="post">
     	<!-- <p>Id: <input type="text" th:field="*{id}" /></p>-->
         <p>Login : <input type="text" th:field="*{loggin}" /></p>

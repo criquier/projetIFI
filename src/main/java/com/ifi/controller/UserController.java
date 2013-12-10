@@ -24,16 +24,26 @@ public class UserController {
 	
 	    @RequestMapping(value="/inscription", method=RequestMethod.GET)
 	    public String inscriptionUser(Model model){
-		model.addAttribute("user", new User());
-		return "inscription";
+			model.addAttribute("user", new User());
+			return "inscription";
 	    }
 	    
 	    @RequestMapping(value="/enregistrementUser", method=RequestMethod.POST)
 	    public String validationInscriptionUser(@ModelAttribute User user, Model model) {
-	         model.addAttribute("user", user);
-	         repository.save(user);
-
-	        return "inscriptionValider";
+	    	String message_error = new String("Ce login existe deja");
+	    	System.out.println("-----"+user.getLoggin());
+	    	if(repository.existUser(user.getLoggin())==true){
+	    		System.out.println("tring validationInscriptionUser-------- Login existe deja-------");
+	    		User u = new User();
+	    		model.addAttribute("message_error", message_error);
+	    		model.addAttribute("user", u);
+	    		return "inscription";
+	    	}else{
+				repository.save(user);
+				System.out.println("-------- Login existe pas-------");
+				model.addAttribute("user", user);
+				return "inscriptionValider";
+	    	}
 	    }
 		
 		@RequestMapping("/save")

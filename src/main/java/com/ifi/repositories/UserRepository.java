@@ -18,38 +18,43 @@ import com.ifi.model.User;
 		@PersistenceContext
 		private EntityManager entityManager;
 		
-		
 		public User findByLoggin(String loggin)
 		{
-			Query query = this.entityManager.createQuery("select u from User u where u.loggin=?");
-			query.setParameter(1, loggin);
-			User user = (User) query.getSingleResult(); 	
+			User user = null;
+			try {
+				Query query = this.entityManager.createQuery("select u from User u where u.loggin=?");
+				query.setParameter(1, loggin);
+				user = (User) query.getSingleResult(); 	
+			} catch (Exception e) {
+				System.out.println("User findByLoggin------------- User non trouve -------------");
+			}
 			return user;
-			
-
 		}
 		
 		public boolean existUser(String loggin){
-			
-			if(findByLoggin(loggin) == null){
-				System.out.println("User n'existe pas ");
-				return false;
+			try {
+				if(findByLoggin(loggin) != null){
+					System.out.println("public boolean existUser------------- User existe  -------------");
+					return true;
+				}
+			} catch (Exception e) {
+				System.out.println("public boolean existUser------------- User existe pas-------------");
 				
 			}
-			System.out.println("User existe");
-			return true;
-			
+			return false;
 		}
 		
 		public void save(User user)
 		{
 			this.entityManager.persist(user);
 		}
+		
 		public List<User> findAll()
 		{
 			Query query= this.entityManager.createQuery("select u from User u");
 			return query.getResultList();
 		}
+		
 		public User findOne(long l)
 		{
 			Query query = this.entityManager.createQuery("select u from User u where u.id=:id");
@@ -57,9 +62,4 @@ import com.ifi.model.User;
 			return (User) query.getSingleResult();
 			
 		}
-		
-	    
 	}
-	
-	
-

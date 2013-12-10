@@ -8,7 +8,7 @@
 	<h1>Connexion</h1>
 	
 	
-	<p th:if="${message_error}">Vos identifiant sont incorrect</p>
+	<p th:if="${message_error}" th:text="${message_error}">Vos identifiant sont incorrect</p>
 	
 	
     <form action="#" th:action="@{/connexion}" th:object="${user}" method="post">
