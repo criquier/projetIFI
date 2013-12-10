@@ -10,15 +10,10 @@
 	<p><a href="/">Acceuil</a></p>
 	<p><a href="/ajouterArticle">Ajouter Article</a></p>
 	<p><a href="/inscription">S'incrire</a></p>
+	<p th:if="${userconnecter}" 
+	   th:text="'Bienvenue ' + ${userconnecter.loggin}">userconnecter</p>
+	<p th:unless="${userconnecter}"><a href="/connexion">Se connecter</a></p>
 	
-<!-- 	<c:catch var="exception">${user.loggin}</c:catch> -->
-<!-- 	<c:if test="${exception==null}">user non connecté.</c:if> -->
-	
-<!-- 	<c:if test="${user.loggin ne null}" > -->
-<!-- 		<c:out value="Bienvenue '${user.loggin}'"/> -->
-<!-- 	</c:if> -->
-	<p><a href="/connexion">Se connecter</a></p>
-
     
     <table border="1">
     <caption>liste des Articles sur le Site</caption>
@@ -41,7 +36,7 @@
     		<th>Login</th>
 			<th>Mot de passe</th>
 			</tr><tr th:each="user: ${users}">
-<!-- 			<td th:text="${user.id}">Id</td> -->
+			<td th:text="${user.id}">Id</td>
 			<td th:text="${user.loggin}">Login</td>
 			<td th:text="${user.password}">Mot de passe</td>
 		</tr>

@@ -6,11 +6,16 @@
 </head>
 <body>
 	<h1>Connexion</h1>
+	
+	
+	<p th:if="${message_error}">Vos identifiant sont incorrect</p>
+	
+	
     <form action="#" th:action="@{/connexion}" th:object="${user}" method="post">
         <p>Login : <input type="text" th:field="*{loggin}" /></p>
         <p>Mot de passe <input type="password" th:field="*{password}" /></p>
 
-        <p><input type="submit" value="Se connectere" /> <input type="reset" value="Reset" /></p>
+        <p><input type="submit" value="Se connecter" /> <input type="reset" value="Reset" /></p>
     </form>
 </body>
 </html>

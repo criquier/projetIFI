@@ -23,9 +23,24 @@ import com.ifi.model.User;
 		{
 			Query query = this.entityManager.createQuery("select u from User u where u.loggin=?");
 			query.setParameter(1, loggin);
-			return (User) query.getSingleResult(); 
+			User user = (User) query.getSingleResult(); 	
+			return user;
+			
+
+		}
+		
+		public boolean existUser(String loggin){
+			
+			if(findByLoggin(loggin) == null){
+				System.out.println("User n'existe pas ");
+				return false;
+				
+			}
+			System.out.println("User existe");
+			return true;
 			
 		}
+		
 		public void save(User user)
 		{
 			this.entityManager.persist(user);
