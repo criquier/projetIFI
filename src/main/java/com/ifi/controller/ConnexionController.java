@@ -33,8 +33,10 @@ public class ConnexionController {
 				model.addAttribute("message_error", message_error);
 				return "connexion";
 			}
-		}
-		
+		}else{
+				model.addAttribute("message_error", message_error);
+				return "connexion";
+			}	
 		return "index";
     }   
 }
