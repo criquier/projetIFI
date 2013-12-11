@@ -3,50 +3,57 @@
 <head> 
     <title>Accueil du Blog</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="mainstyle.css" media="all"/>  
       
 </head>
 <body>
-	<h1>Bienvenue sur notre blog</h1>
-	<p><a href="/">Acceuil</a></p>
-	<p><a href="/ajouterArticle">Ajouter Article</a></p>
-	<p><a href="/inscription">S'incrire</a></p>
-
-<!-- 	<p th:text="${sessionBean.user.loggin}"></p> -->
-	<div th:if="${sessionBean}"> 
-	   <p th:text="'Bienvenue ' + ${sessionBean.user.loggin}">userconnecter</p><a href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></div>
-	<p th:unless="${sessionBean}"><a href="/connexion">Se connecter</a></p>
+	<section class="barreHaut">
+		<img src="guirlande.png" />
+    	<div th:if="${userconnecter}"> 
+			<span th:text="'Bienvenue ' + ${userconnecter.loggin}" ></span>
+			<a href="/user/profil">Modifier son profil</a>
+		</div>
+		<a th:unless="${userconnecter}" href="/connexion">Se connecter</a>
 	
-    <p th:if="${message_error}" th:text="${message_error}"></p>
-    <table border="1">
-    <caption>liste des Articles sur le Site</caption>
-    	<tr>
-    		<th>Titre</th>
-    		<th>Date de publication</th>
-			<!--  <th>Contenu</th> -->
-			<th>Lire</th>
-			</tr><tr th:each="article: ${articles}">
-			<td th:text="${article.titre}">titre</td>
-			<td th:text="${article.date}">date</td>
-			<!--  <td th:text="${article.contenu}">contenu</td>-->
-			<td>
-			<a href="articleTemplate.html" th:href="@{/consulterArticle(id=${article.id})}">lire article</a>
-			</td>
-		</tr>
-	</table>
+	<p th:if="${message_error}" th:text="${message_error}"></p>
+    </section>
+	<div class="bonnet">
+		<img src="bonnet.png" />
+	</div>
+	<section class="menu">
+		<section class="avatar">
+			<img src="avatar.jpeg" />
+		</section>
+		<section class="listMenu">
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li><a href="/ajouterArticle">Ajouter Article</a></li>
+				<li><a href="/inscription">S'incrire</a></li>
+			</ul>
+		</section>
+	</section>
 	
-	
-	<table border="1">
-	   <caption>liste des utilisateurs</caption>
-    	<tr>
-    		<th>Id</th>
-    		<th>Login</th>
-			<th>Mot de passe</th>
-			</tr><tr th:each="user: ${users}">
-			<td th:text="${user.id}">id</td>
-			<td><a href ="userTemplate.html" th:href="@{/user/profil(id=${user.id})}"><span th:text="${user.loggin}"></span></a></td>
-			<td th:text="${user.password}">Mot de passe</td>
-		</tr>
-	</table>
-    
+ <section class="corps">
+    	<header>
+	    	<h1>Bienvenue sur notre blog</h1>
+    	</header>
+    	<article class="article" th:each="article: ${articles}">
+    		<header>
+    			<strong th:text="${article.titre}">Titre</strong><br/>
+    			<span th:text="${article.date}"> Date </span>
+    			Par <span > xxxx </span>
+    			Tags associés : <span >Bubulle, first,noel,....</span>
+    		</header>
+    		<section >
+    			<p th:text="${article.contenu}">
+    				contenu
+    			</p>
+    		</section>
+    	</article>
+    </section>
+        
+    <div class="houx">
+    	<img src="houx.png" />
+    </div>
 </body>
 </html>

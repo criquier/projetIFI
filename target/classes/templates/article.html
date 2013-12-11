@@ -3,18 +3,59 @@
 <head> 
     <title>Article</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="mainstyle.css" media="all"/>      
     <!--  <link rel="stylesheet" href="mycss.css" th:href="@{mycss.css}" /> -->
 </head>
 <body>
-	<h1>Création d'Article</h1>
-    <form action="#" th:action="@{/ajouterArticle}" th:object="${article}" method="post">
-        <p>Titre: <input type="text" th:field="*{titre}" /></p>
-         <p>Date: <input type="text" th:field="*{date}" /></p>
-         <p>Contenu:
-         <textarea th:field="*{contenu}"></textarea>
-         </p>
-         <!--   <p>Auteur: <input type="text" th:field="*{auteurs}" /></p> -->
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-    </form>
+
+	<section class="barreHaut">
+		<img src="guirlande.png" />
+    	<a href="/connexion">Se connecter</a>
+    </section>
+	<div class="bonnet">
+		<img src="bonnet.png" />
+	</div>
+	<section class="menu">
+		<section class="avatar">
+			<img src="avatar.jpeg" />
+		</section>
+		<section class="listMenu">
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li><a href="/ajouterArticle">Ajouter Article</a></li>
+				<li><a href="/inscription">S'incrire</a></li>
+			</ul>
+		</section>
+	</section>
+
+
+    <section class="corps">
+    	<img class="houxArticle" src="houxArticle.png" />
+    	<header>
+	    	<h1>Création d'Article</h1>
+    	</header>
+    	<section class="article">
+		    <form action="#" th:action="@{/ajouterArticle}" th:object="${article}" method="post">
+		       	<!-- <p>Id: <input type="text" th:field="*{id}" /></p>-->
+		         <p>
+			         Titre: 
+			         <br/>
+			         <input type="text" th:field="*{titre}" />
+			         <br/>
+			         <br/>	         
+			         <label name="contenu">Contenu:</label><br/>
+			         <textarea id="contenu" th:field="*{contenu}"></textarea>
+		          </p>
+		         <!--   <p>Auteur: <input type="text" th:field="*{auteurs}" /></p> -->
+		        <p><input type="reset" value="Annuler" /><input type="submit" value="Créer" /></p>
+		    </form>
+		    <img class="boule" src="boule.png" />
+		</section>
+    </section>
+        
+    <div class="houx">
+    	<img src="houx.png" />
+    </div>
+    
 </body>
 </html>
