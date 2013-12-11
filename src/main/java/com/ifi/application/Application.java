@@ -80,7 +80,7 @@ public class Application {
     public static void main(String[] args) {
        // AbstractApplicationContext context = new AnnotationConfigApplicationContext(Application.class,args);
     	// SpringApplication.run(Application.class, args);
-    	 System.out.println("--------------Thierno saidou-------------------");
+    	
     	 ApplicationContext context = SpringApplication.run(Application.class, args);
     	 Utils.fillDataBase(context);
        

@@ -9,11 +9,8 @@
 <body>
 	<section class="barreHaut">
 		<img src="guirlande.png" />
-    	<div th:if="${userconnecter}"> 
-			<span th:text="'Bienvenue ' + ${userconnecter.loggin}" ></span>
-			<a href="/user/profil">Modifier son profil</a>
-		</div>
-		<a th:unless="${userconnecter}" href="/connexion">Se connecter</a>
+    	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
+		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
 	
 	<p th:if="${message_error}" th:text="${message_error}"></p>
     </section>
@@ -24,11 +21,16 @@
 		<section class="avatar">
 			<img src="avatar.jpeg" />
 		</section>
+		
 		<section class="listMenu">
+		<p 	
+			th:if="${sessionBean}"
+			th:text="'Bienvenue ' + ${sessionBean.user.loggin}"></p>
 			<ul>
 				<li><a href="/">Accueil</a></li>
-				<li><a href="/ajouterArticle">Ajouter Article</a></li>
-				<li><a href="/inscription">S'incrire</a></li>
+				<li th:if="${sessionBean}"><a href="/user/profil">Modifier son profil</a></li>
+				<li th:if="${sessionBean}"><a href="/ajouterArticle">Ajouter Article</a></li>
+				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
 			</ul>
 		</section>
 	</section>

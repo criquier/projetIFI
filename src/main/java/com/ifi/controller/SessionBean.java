@@ -13,17 +13,8 @@ import com.ifi.model.User;
 public class SessionBean {
 	
 		private final String id = UUID.randomUUID().toString();
-		public User user;
-		public String loggin; 
+		public User user;	
 		
-		
-		
-		public String getLoggin() {
-			return loggin;
-		}
-		public void setLoggin(String loggin) {
-			this.loggin = loggin;
-		}
 		public User getUser() {
 			return user;
 		}
