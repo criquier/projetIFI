@@ -23,6 +23,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.ifi.repositories.ArticleRepository;
+import com.ifi.repositories.CommentaireRepository;
 import com.ifi.repositories.UserRepository;
 import com.ifi.utils.Utils;
 
@@ -68,6 +69,11 @@ public class Application {
     @Bean
     public ArticleRepository articleRepository(){
     	return new ArticleRepository();
+    }
+    
+    @Bean
+    public CommentaireRepository commentaireRepository(){
+    	return new CommentaireRepository();
     }
 
     public static void main(String[] args) {

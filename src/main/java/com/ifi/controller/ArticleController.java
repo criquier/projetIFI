@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ifi.model.Article;
+import com.ifi.model.Commentaire;
 import com.ifi.repositories.ArticleRepository;
+import com.ifi.repositories.CommentaireRepository;
 
 @Controller
 public class ArticleController {
-    @Autowired
+       @Autowired
+       private CommentaireRepository comRepository;
+        @Autowired
 	private ArticleRepository repository;
+        private Article article;
+    
     
     //intercepte les ajouts d'article
     @RequestMapping(value="/ajouterArticle", method=RequestMethod.GET)
@@ -29,6 +35,7 @@ public class ArticleController {
     public String ajouterArticleAfficher(@ModelAttribute Article article, Model model) {
          model.addAttribute("article", article);
          repository.save(article);
+         this.article=article;
         return "articleTemplate";
     }
   
@@ -48,8 +55,31 @@ public class ArticleController {
     @RequestMapping("/consulterArticle")
     public String consulterArticle(@RequestParam(value="id", required=true) long id,
 	    Model model){
-	model.addAttribute(repository.findById(id));
+	this.article=repository.findById(id);
+	model.addAttribute("article",this.article);
+        model.addAttribute("commentaires",this.article.getCommentaires());
 	return "articleTemplate";
     }
     
+    // Ajouter un commentaire à cet article
+    @RequestMapping(value="/ajouterCommentaire", method=RequestMethod.POST)
+    public String ajouterCommentaire(@RequestParam("contenuCommentaire") String commentaire,
+	    Model model) {
+	
+         // on ajoute le commentaire de l'article
+	Commentaire c=new Commentaire();
+	c.setContenu(commentaire);
+	comRepository.save(c);
+	
+	//System.out.println("SIZE:"+this.article.getCommentaires().size());
+        this.article.getCommentaires().add(c);
+        model.addAttribute("article",this.article);
+        model.addAttribute("commentaires",this.article.getCommentaires());
+         
+        repository.update(this.article);
+        Article ar=repository.findById(this.article.getId());
+      //  System.out.println("SIZE22:"+ar.getCommentaires().size());
+        return "articleTemplate";
+        //return "redirect:/consulterArticle?id="+article.getId();
+    }
 }

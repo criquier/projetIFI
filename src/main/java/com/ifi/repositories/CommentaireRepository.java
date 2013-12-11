@@ -25,9 +25,9 @@ public class CommentaireRepository {
 		
 	}
 	// Sauvegarder un Commentaire
-	public void save(Commentaire Commentaire)
+	public void save(Commentaire commentaire)
 	{
-	    this.entityManager.persist(Commentaire);
+	    this.entityManager.persist(commentaire);
 	}
 	// Récupérer la liste de tous les Commentaires
 	public List<Commentaire> findAll()

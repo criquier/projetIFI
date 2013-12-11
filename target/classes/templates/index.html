@@ -20,11 +20,15 @@
     	<tr>
     		<th>Titre</th>
     		<th>Date de publication</th>
-			<th>Contenu</th>
+			<!--  <th>Contenu</th> -->
+			<th>Lire</th>
 			</tr><tr th:each="article: ${articles}">
 			<td th:text="${article.titre}">titre</td>
 			<td th:text="${article.date}">date</td>
-			<td th:text="${article.contenu}">contenu</td>
+			<!--  <td th:text="${article.contenu}">contenu</td>-->
+			<td>
+			<a href="articleTemplate.html" th:href="@{/consulterArticle(id=${article.id})}">lire article</a>
+			</td>
 		</tr>
 	</table>
 	
