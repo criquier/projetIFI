@@ -24,6 +24,12 @@ public class ConnexionController {
 		return "connexion";
     }
     
+    @RequestMapping(value="/deconnexion", method=RequestMethod.GET)
+    public String deconnexion(Model model){
+    	sessionBean.setUser(null);
+		return "index";
+    }
+    
     @RequestMapping(value="/connexion", method=RequestMethod.POST)
     public String connexionValider(User user,Model model){
     	String message_error = new String("Identifiant incorrect");
@@ -32,8 +38,6 @@ public class ConnexionController {
 			User userFind = repository.findByLoggin(user.getLoggin());
 			if(userFind.getPassword().equals(user.getPassword())){
 				sessionBean.setUser(userFind);
-				sessionBean.setLoggin(userFind.getLoggin());
-				System.out.println("-------------------------connexion "+sessionBean.getUser().getLoggin());
 				return "redirect:/";
 			}else{
 				model.addAttribute("message_error", message_error);
