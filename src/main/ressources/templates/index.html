@@ -10,9 +10,11 @@
 	<p><a href="/">Acceuil</a></p>
 	<p><a href="/ajouterArticle">Ajouter Article</a></p>
 	<p><a href="/inscription">S'incrire</a></p>
-	<div th:if="${userconnecter}"> 
-	   <p th:text="'Bienvenue ' + ${userconnecter.loggin}">userconnecter</p><a href="/user/profil">Modifier son profil</a></div>
-	<p th:unless="${userconnecter}"><a href="/connexion">Se connecter</a></p>
+
+<!-- 	<p th:text="${sessionBean.user.loggin}"></p> -->
+	<div th:if="${sessionBean}"> 
+	   <p th:text="'Bienvenue ' + ${sessionBean.user.loggin}">userconnecter</p><a href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></div>
+	<p th:unless="${sessionBean}"><a href="/connexion">Se connecter</a></p>
 	
     <p th:if="${message_error}" th:text="${message_error}"></p>
     <table border="1">

@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Profil de l'utilisateur</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1 th:text="'Bienvenue sur profil '+ ${user.loggin}">Bienvenue sur profil</h1>
+ 
+ 		<h3>Vos informations</h3>
+     <p th:text="'Login ' + ${user.loggin}" />
+     <p th:text="'mot de passe: ' + ${user.password}" />
+  
+  	<form action="#" th:action="@{/user/profil/modifier}" th:object="${user}" method="post">
+        <p>Login : <input type="text" th:field="*{loggin}" /></p>
+        <p>Mot de passe : <input type="password" th:field="*{password}"/></p>
+        <p><input type="submit" value="Modifier" /> <input type="reset" value="Reset" /></p>
+    </form>
+  
+     <p><a href="/">Accueil</a></p>
+     
+</body>
+</html>

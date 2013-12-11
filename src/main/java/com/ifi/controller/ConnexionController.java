@@ -15,6 +15,9 @@ public class ConnexionController {
     @Autowired
 	private UserRepository repository;
     
+    @Autowired
+    SessionBean sessionBean;
+    
     @RequestMapping(value="/connexion", method=RequestMethod.GET)
     public String connexion(Model model){
     	model.addAttribute("user", new User());
@@ -27,9 +30,12 @@ public class ConnexionController {
     	
 		if(repository.existUser(user.getLoggin()) == true){
 			User userFind = repository.findByLoggin(user.getLoggin());
-			if(userFind.getPassword().equals(user.getPassword()))
-				model.addAttribute("userconnecter", userFind);
-			else{
+			if(userFind.getPassword().equals(user.getPassword())){
+				sessionBean.setUser(userFind);
+				sessionBean.setLoggin(userFind.getLoggin());
+				System.out.println("-------------------------connexion "+sessionBean.getUser().getLoggin());
+				return "redirect:/";
+			}else{
 				model.addAttribute("message_error", message_error);
 				return "connexion";
 			}
@@ -37,6 +43,5 @@ public class ConnexionController {
 				model.addAttribute("message_error", message_error);
 				return "connexion";
 			}	
-		return "index";
     }   
 }
