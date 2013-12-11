@@ -21,14 +21,14 @@
 		<section class="avatar">
 			<img src="avatar.jpeg" />
 		</section>
-		
+<!-- 		@{/user/profil(id=${sessionBean.user.id})} -->
 		<section class="listMenu">
 		<p 	
 			th:if="${sessionBean}"
 			th:text="'Bienvenue ' + ${sessionBean.user.loggin}"></p>
 			<ul>
 				<li><a href="/">Accueil</a></li>
-				<li th:if="${sessionBean}"><a href="/user/profil">Modifier son profil</a></li>
+				<li th:if="${sessionBean}"><a href="'/user/profil?id='+${sessionBean.user.id}">Modifier son profil</a></li> 
 				<li th:if="${sessionBean}"><a href="/ajouterArticle">Ajouter Article</a></li>
 				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
 			</ul>

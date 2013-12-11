@@ -76,11 +76,10 @@ import com.ifi.model.User;
 	    	   User u= findOne(user.getId());
 	 	       u.setLoggin(user.getLoggin());
 	 	       u.setPassword(user.getPassword());
-	 	       //this.entityManager.getTransaction().commit();
-	 	       this.entityManager.merge(user);
+	 	       entityManager.merge(user); 	       
 	 	       return true;
 			} catch (Exception e) {
-				System.out.println("----------------- User non trouvé pour modification");
+				System.out.println("update-----------------  User non trouvé pour modification");
 				return false;
 			}
 	    }

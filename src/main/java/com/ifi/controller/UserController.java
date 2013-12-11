@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ifi.model.Article;
 import com.ifi.model.User;
 import com.ifi.repositories.UserRepository;
 
@@ -20,7 +19,8 @@ public class UserController {
 		
 		@Autowired
 		private UserRepository repository;
-		
+		@Autowired
+		SessionBean sessionBean;
 	
 	    @RequestMapping(value="/inscription", method=RequestMethod.GET)
 	    public String inscriptionUser(Model model){
@@ -59,18 +59,22 @@ public class UserController {
 			return "saved";
 		}
 		
-		@RequestMapping(value="/user/profil", method=RequestMethod.GET)
+		@RequestMapping(value="/user/profil",method=RequestMethod.GET)
 		public String afficherUser( @RequestParam(value="id", required=true) String id, Model model)
 		{
-			User user = repository.findOne(Long.parseLong(id));
-			if(user != null){
-				model.addAttribute("user", user);
-				return "userTemplate";
-			}else{
-				String message_error = new String("Erreur lors de la récupération de l'User");
-				model.addAttribute("message_error", message_error);
-				return "index";
-			}
+			System.out.println("------------------id : "+id);
+			//System.out.println("------------------id User trouve  : "+repository.findOne(Long.parseLong(id)).getId());
+			//System.out.println("------------------login User trouve  : "+repository.findOne(Long.parseLong(id)).getLoggin());
+			return "index";
+//			User user = repository.findOne(Long.parseLong(id));
+//			if(user != null){
+//				model.addAttribute("user", user);
+//				return "userTemplate";
+//			}else{
+//				String message_error = new String("Erreur lors de la récupération de l'User");
+//				model.addAttribute("message_error", message_error);
+//				return "index";
+//			}
 		}
 		
 		@RequestMapping(value="/user/profil/modifier", method=RequestMethod.POST)
