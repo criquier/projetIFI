@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.ifi.model.User;
 import com.ifi.repositories.ArticleRepository;
+import com.ifi.repositories.CommentaireRepository;
 import com.ifi.repositories.UserRepository;
 import com.ifi.utils.Utils;
 
@@ -104,7 +105,14 @@ public class Application {
     	return new ArticleRepository();
     }
     
+<<<<<<< HEAD
     
+=======
+    @Bean
+    public CommentaireRepository commentaireRepository(){
+    	return new CommentaireRepository();
+    }
+>>>>>>> b7ee66874d62da309007ee28da2966b7e8f1b388
 
     public static void main(String[] args) {
        // AbstractApplicationContext context = new AnnotationConfigApplicationContext(Application.class,args);

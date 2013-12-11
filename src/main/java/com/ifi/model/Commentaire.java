@@ -1,5 +1,6 @@
 package com.ifi.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,25 +13,29 @@ import javax.persistence.OneToOne;
 public class Commentaire {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    	private long idCommentaire;
+    	private long id;
     	private String contenu;
-    	private Date dateCommentaire;
+    	private String date;
     	@OneToOne
     	private User auteur;
     	
-    	public Commentaire(){}
-    	public Commentaire(long idCommentaire, String contenu, Date dateCommentaire, User auteur)
+    	public Commentaire(){
+            SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+            Date today=new Date();
+            date=formater.format(today);
+    	}
+    	public Commentaire(long id, String contenu, String date, User auteur)
     	{
-    	    this.idCommentaire=idCommentaire;
+    	    this.id=id;
     	    this.contenu=contenu;
-    	    this.dateCommentaire=dateCommentaire;
+    	    this.date=date;
     	    this.auteur=auteur;
     	}
 	public long getIdCommentaire() {
-	    return idCommentaire;
+	    return id;
 	}
-	public void setIdCommentaire(long idCommentaire) {
-	    this.idCommentaire = idCommentaire;
+	public void setIdCommentaire(long id) {
+	    this.id = id;
 	}
 	public String getContenu() {
 	    return contenu;
@@ -38,11 +43,11 @@ public class Commentaire {
 	public void setContenu(String contenu) {
 	    this.contenu = contenu;
 	}
-	public Date getDateCommentaire() {
-	    return dateCommentaire;
+	public String getDate() {
+	    return date;
 	}
-	public void setDateCommentaire(Date dateCommentaire) {
-	    this.dateCommentaire = dateCommentaire;
+	public void setDate(String date) {
+	    this.date = date;
 	}
 	public User getAuteur() {
 	    return auteur;

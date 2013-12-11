@@ -1,10 +1,13 @@
 package com.ifi.model;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,8 +25,8 @@ public class Article {
   private String date;
   @ManyToOne
   private User auteur;
-  @OneToMany
-  private List<Commentaire> commentaires;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  private List<Commentaire> commentaires=new ArrayList<Commentaire>();
    //Constructeurs
    public Article(){
        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");

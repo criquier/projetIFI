@@ -15,31 +15,40 @@ import com.ifi.model.Article;
 @Transactional
 public class ArticleRepository {
     @PersistenceContext
-	private EntityManager entityManager;
+        private EntityManager entityManager;
        // Trouver un article à travers son id
-	public Article findById(long id)
-	{
-		Query query = this.entityManager.createQuery("select a from Article a where a.id=?");
-		query.setParameter(1, id);
-		return (Article) query.getSingleResult(); 
-		
-	}
-	// Sauvegarder un article
-	public void save(Article article)
-	{
-	    this.entityManager.persist(article);
-	}
-	// Récupérer la liste de tous les articles
-	public List<Article> findAll()
-	{
-		Query query= this.entityManager.createQuery("select a from Article a");
-		return query.getResultList();
-	}
-	// Supprimer un article
-	public void delete(long id){
-	    this.entityManager.remove(this.findById(id));
-	}
-	
-	
+        public Article findById(long id)
+        {
+                Query query = this.entityManager.createQuery("select a from Article a where a.id=?");
+                query.setParameter(1, id);
+                return (Article) query.getSingleResult();
+                
+        }
+        // Sauvegarder un article
+        public void save(Article article)
+        {
+         this.entityManager.persist(article);
+        }
+        //udapte
+        public void update(Article article){
+            Article a=findById(article.getId());
+            a.setTitre(article.getTitre());
+            a.setContenu(article.getContenu());
+            a.setCommentaires(article.getCommentaires());
+            //entityManager.getTransaction().commit();
+            entityManager.merge(article);
+        }
+        // Récupérer la liste de tous les articles
+        public List<Article> findAll()
+        {
+                Query query= this.entityManager.createQuery("select a from Article a");
+                return query.getResultList();
+        }
+        // Supprimer un article
+        public void delete(long id){
+         this.entityManager.remove(this.findById(id));
+        }
+        
+        
     
 }

@@ -29,7 +29,7 @@ public class MainController {
 	{  
     	User user = new User("null", "null");
 	   // on recuppère la liste de tous les articles publié afin de les afficher
-	     List<Article> articles=articleRepository.findAll();
+	     List<Article> articles=(List<Article>) articleRepository.findAll();
 	     List<User> users=userRepository.findAll();
 	     // on ajoute la liste des aticles à la vue
 	     model.addAttribute("articles",articles);
