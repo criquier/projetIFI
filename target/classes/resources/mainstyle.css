@@ -1,0 +1,227 @@
+html{
+	width: 100%;
+	height: 100%;
+	font-family:Andale Mono, monospace;
+	background-image: url(./fond5.jpg);
+	background-position: center center;
+	background-repeat: no-repeat; 
+	background-attachment: fixed; 
+	background-size: cover; 
+	-moz-background-size: 100% 100%;     /* Gecko 1.9.2 (Firefox 3.6) */
+	-o-background-size: 100% 100%;        /* Opera 9.5 */
+	-webkit-background-size: 100% 100%;   /* Safari 3.0 */
+	background-size: 100% 100%;           /* Gecko 2.0 (Firefox 4.0) > CSS3 */ 
+}
+
+body{
+	position:relative;
+	width: 100%;
+	height: 100%;
+	min-height:100%;
+	min-width:100%;
+}
+
+ul {
+	list-style: none;
+}
+
+li{
+	padding-top:3%;
+	padding-bottom:3%;
+	width:100%;
+	text-align:center;
+	height:5%;
+	border-bottom:1px solid gray;
+	position:relative;
+    margin-left:-8%;
+    height: 100%; 
+}
+  
+li:last-child{
+    margin-bottom:1%;
+    border-bottom:none;
+}
+
+li:hover{
+	background-color:rgba(27, 79, 8,0.7);
+
+	
+}
+
+li:hover > a{
+	color:white;
+}
+
+a{
+	text-decoration : none;
+	color:black;
+}
+
+.bonnet{
+	position:absolute;
+	top:0;
+	left:-2%;
+	z-index : 4;
+}
+
+div[class*="bonnet"] > img{
+	width:50%;
+	height:50%;
+}
+
+.houx{
+	position:fixe;
+	top:0;
+	margin-left:90%;
+	z-index : 1;
+}
+
+div[class*="houx"] > img{
+	width:75%;
+	height:75%;
+}
+
+.avatar{
+	position:relative;
+	top:12%;
+	left:12%;
+	border:1px outset black;
+	width:75%;
+	height:30%;
+}
+
+section[class*="avatar"] > img{
+	width:100%;
+	height:100%;
+}
+
+.listMenu{
+	position:relative;
+	top:25%;
+}
+
+.menu{
+	width: 15%;
+	height:100%;
+	position:relative;
+	top:15.5%;
+	left:7%;
+	background-color:white;
+	z-index: 0;
+	border:1px solid black;
+	display:inline-block;
+}
+
+section[class*="barreHaut"] > img{
+	margin-right:0.5%;
+	margin-left:40%;
+}
+
+section[class*="barreHaut"] > a{
+	color:white;
+	float:right;
+	margin-right:0.5%;
+	margin-top:0.8%;
+}
+
+.boule{
+	width:15%;
+	height:15%;
+	z-index:0;
+	margin-left:2%;
+	margin-bottom:2%;
+	position:relative;
+}
+
+.houxArticle{
+	width:15%;
+	height:25%;
+	position:absolute;
+	left:88%;
+	top:-9%;
+}
+
+.barreHaut{
+	background-color:rgba(0,0,0,0.5);
+	width:98%;
+	height:5%;
+	z-index: 1;
+	top:7%;
+	position:fixed;
+}
+
+section[class*="corps"]{
+	background-color:rgba(255,255,255,0.5);
+	display:inline-block;
+	vertical-align:top;
+	position:relative;
+	top:30%;
+	left:10%;	
+	width:65%;
+	min-height:55%;
+	border-radius: 15px;
+}
+
+section[class*="corps"] > header{
+	margin-top:2%;
+	text-align:center;
+}
+
+section > article[class*="article"]{
+	width:80%;
+	background-color:rgba(255,255,255,0.5);
+	border : 1px solid green;
+	margin-left:10%;
+	border-radius: 10px;
+	min-height:25%;
+	height:25%;
+	margin-bottom:2%;
+}
+
+article[class*="article"] > header{
+	text-decoration:bold;
+	margin-left:5%;
+}
+
+article[class*="article"] > header > strong{
+	font-size:1.5em;
+	margin-left:-3%;
+}
+
+article[class*="article"] > section{
+	border-top : 1px solid green;
+}
+
+article[class*="article"] > section > p{
+	margin-left:5%;
+}
+
+section[class*="article"] > form{
+	margin-top:5%;
+	margin-left:15%;
+}
+
+.actionSuivanteArticle{
+	padding-top:1%;
+	margin-left:30%;
+}
+
+section[class*="actionSuivanteArticle"] > a{
+	padding:2%;
+	border-radius:5px;
+	background-color:rgba(255,255,255,0.5);
+}
+
+section[class*="actionSuivanteArticle"] > a:hover{
+	background-color:rgba(27, 79, 8,0.7);
+	color:white;
+}
+
+input[type*="text"], textarea{
+	border-radius:10px;
+	width:80%;
+}
+
+textarea{
+	min-height:200px;
+}
