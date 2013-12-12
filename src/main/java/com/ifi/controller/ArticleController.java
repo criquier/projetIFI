@@ -73,6 +73,7 @@ public class ArticleController {
 	
          // on ajoute le commentaire de l'article
 	Commentaire c=new Commentaire();
+	c.setAuteur(sessionBean.getUser());
 	c.setContenu(commentaire);
 	comRepository.save(c);
 	

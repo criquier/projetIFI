@@ -46,7 +46,7 @@
 			 <section>
 	    		<section class="commentaires" th:each="commentaire: ${article.commentaires}">
 	    			<header>
-			    		<span >Auteur : xxx </span>
+			    		<span th:text="'Auteur : ' + ${commentaire.auteur.loggin}"></span>
 				     	<span th:text="'le: ' + ${commentaire.date}"> </span>
 	    			</header>
 	    			<section th:text="' ' + ${commentaire.contenu}">
@@ -62,8 +62,8 @@
     		</section>
     	</article>
     	<section class="actionSuivanteArticle">
-    		<a href="/ajouterArticle">ajouter article</a>
-			<a href="/">Index</a>
+    		<a href="/ajouterArticle">Ajouter article</a>
+			<a href="/">Accueil</a>
     	</section>
     	<img class="boule2" src="boule2.png" />
     </section>
