@@ -29,8 +29,7 @@ public class TestUser {
 	public void NotEmptymdpAndlogin()
 	{
 		assertTrue(Userother.equals(null)||Userother.equals(null));
-	}	
-	
+	}		
 	@Test
 	public void testSamemdp()
 	{
