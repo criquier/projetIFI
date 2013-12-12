@@ -79,8 +79,8 @@ public class ArticleController {
 	//System.out.println("SIZE:"+this.article.getCommentaires().size());
         this.article.getCommentaires().add(c);
         model.addAttribute("article",this.article);
-        model.addAttribute("commentaires",this.article.getCommentaires());
-         
+        model.addAttribute("sessionBean", sessionBean);
+
         repository.update(this.article);
         Article ar=repository.findById(this.article.getId());
       //  System.out.println("SIZE22:"+ar.getCommentaires().size());
