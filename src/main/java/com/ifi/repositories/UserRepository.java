@@ -49,6 +49,7 @@ import com.ifi.model.User;
 			this.entityManager.persist(user);
 		}
 		
+		@SuppressWarnings("unchecked")
 		public List<User> findAll()
 		{
 			Query query= this.entityManager.createQuery("select u from User u");

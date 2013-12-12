@@ -12,6 +12,7 @@ import com.ifi.model.User;
 @Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class SessionBean {
 	
+		@SuppressWarnings("unused")
 		private final String id = UUID.randomUUID().toString();
 		public User user;	
 		

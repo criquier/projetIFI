@@ -83,7 +83,8 @@ public class ArticleController {
         model.addAttribute("sessionBean", sessionBean);
 
         repository.update(this.article);
-        Article ar=repository.findById(this.article.getId());
+        @SuppressWarnings("unused")
+		Article ar=repository.findById(this.article.getId());
       //  System.out.println("SIZE22:"+ar.getCommentaires().size());
         return "articleTemplate";
         //return "redirect:/consulterArticle?id="+article.getId();
