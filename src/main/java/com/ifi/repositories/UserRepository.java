@@ -72,16 +72,23 @@ import com.ifi.model.User;
 		
 	    public boolean update(User user){
 	    	
-	    	try {
-	    	   User u= findOne(user.getId());
-	 	       u.setLoggin(user.getLoggin());
-	 	       u.setPassword(user.getPassword());
-	 	       entityManager.merge(user); 	       
+//	    	try {
+//	    		System.out.println("---------------------------- 1");
+//	    	   User u= findOne(user.getId());
+//	    	   System.out.println("---------------------------- 2");
+//	 	       u.setLoggin(user.getLoggin());
+//	 	      System.out.println("---------------------------- 3");
+//	 	       u.setPassword(user.getPassword());
+//	 	      System.out.println("---------------------------- 4");
+	 	       entityManager.merge(user);
 	 	       return true;
-			} catch (Exception e) {
-				System.out.println("update-----------------  User non trouvé pour modification");
-				return false;
-			}
+//	 	      System.out.println("---------------------------- 5");
+	 	      // System.out.println("update Verification apres mise à jour-----------------  User : "+findOne(user.getId()).toString());
+//	 	       return true;
+//			} catch (Exception e) {
+//				System.out.println("update-----------------  Erreur lors de la  modification");
+//				return false;
+//			}
 	    }
 	   
 	    public void delete(long id){

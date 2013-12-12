@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Build-Jdk: 1.7.0_06
-Built-By: Maxime
+Build-Jdk: 1.7.0_21
+Built-By: gens
 Created-By: Maven Integration for Eclipse
 Main-Class: com.ifi.application.Application
 

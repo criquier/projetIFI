@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,7 +26,6 @@ public class MainController {
     @RequestMapping(value="/", method=RequestMethod.GET)
 	public String index( Model model)
 	{  
-    	User user = new User("null", "null");
 	   // on recuppère la liste de tous les articles publié afin de les afficher
 	     List<Article> articles=(List<Article>) articleRepository.findAll();
 	     List<User> users=userRepository.findAll();
@@ -39,7 +37,7 @@ public class MainController {
 	    	System.out.println("User non connecte");
 	     else{
 	    	 System.out.println("-------------------------main "+sessionBean.getUser().getLoggin());
-	     
+	    	 
 	     model.addAttribute("sessionBean",sessionBean);
 	     
 	     }

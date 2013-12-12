@@ -9,9 +9,8 @@
 	<p th:if="${message_error}" th:text="${message_error}">Login existe deja</p>
 	
     <form action="#" th:action="@{/enregistrementUser}" th:object="${user}" method="post">
-    	<!-- <p>Id: <input type="text" th:field="*{id}" /></p>-->
         <p>Login : <input type="text" th:field="*{loggin}" /></p>
-         <p>Mot de passe <input type="password" th:field="*{password}" /></p>
+        <p>Mot de passe <input type="password" th:field="*{password}" /></p>
 
         <p><input type="submit" value="S'inscrire" /> <input type="reset" value="Reset" /></p>
     </form>

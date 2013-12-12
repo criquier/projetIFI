@@ -40,8 +40,9 @@ public class UserController {
 		    		return "inscription";
 		    	}else{
 					repository.save(user);
-					System.out.println("-------- Login existe pas-------");
+					System.out.println("-------- Login existe pas deka en base,  utilisateur bien enregistrer-------");
 					model.addAttribute("user", user);
+					sessionBean.setUser(user);
 					return "inscriptionValider";
 		    	}
 	    	else{
@@ -62,33 +63,37 @@ public class UserController {
 		@RequestMapping(value="/user/profil",method=RequestMethod.GET)
 		public String afficherUser( @RequestParam(value="id", required=true) String id, Model model)
 		{
-			System.out.println("------------------id : "+id);
-			//System.out.println("------------------id User trouve  : "+repository.findOne(Long.parseLong(id)).getId());
-			//System.out.println("------------------login User trouve  : "+repository.findOne(Long.parseLong(id)).getLoggin());
-			return "index";
-//			User user = repository.findOne(Long.parseLong(id));
-//			if(user != null){
-//				model.addAttribute("user", user);
-//				return "userTemplate";
-//			}else{
-//				String message_error = new String("Erreur lors de la récupération de l'User");
-//				model.addAttribute("message_error", message_error);
-//				return "index";
-//			}
+			
+			User user = repository.findOne(Long.parseLong(id));
+			if(user != null){
+				model.addAttribute("sessionBean",sessionBean);
+				model.addAttribute("user", user);
+				return "userTemplate";
+			}else{
+				String message_error = new String("Erreur lors de la récupération de l'User, l'user n'existe pas");
+				model.addAttribute("message_error", message_error);
+				return "index";
+			}
 		}
 		
 		@RequestMapping(value="/user/profil/modifier", method=RequestMethod.POST)
 		public String modifierUser( @ModelAttribute User user, Model model)
 		{
 			long id = user.getId();
+			System.out.println("----------------------------User recupére:"+user.toString());
 				if(repository.update(user) == true){
-					User u = repository.findOne(id);
-					model.addAttribute("user", u);
+					User userModifier = repository.findOne(id);
+					System.out.println("modifierUser : ------------------------------- User modifier : "+userModifier.toString());
+					sessionBean.setUser(userModifier);
+					model.addAttribute("user", userModifier);
+					model.addAttribute("sessionBean", sessionBean);
 					return "userTemplate";
 				}else{
+					System.out.println("modifierUser : ------------------------------- update = false");
 					String message_error = new String("Impossible de mettre à jour vos informations");
 					model.addAttribute("message_error", message_error);
 					model.addAttribute("user", user);
+					model.addAttribute("sessionBean", sessionBean);
 					return "userTemplate";
 				}
 			
