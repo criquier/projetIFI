@@ -21,7 +21,6 @@
 		<section class="avatar">
 			<img src="avatar.jpeg" />
 		</section>
-<!-- 		@{/user/profil(id=${sessionBean.user.id})} -->
 		<section class="listMenu">
 		<p 	
 			th:if="${sessionBean}"
@@ -43,7 +42,7 @@
     		<header>
     			<strong th:text="${article.titre}">Titre</strong><br/>
     			<span th:text="${article.date}"> Date </span>
-    			Par <span > xxxx </span>
+    			Auteur <span th:text="${article.auteur.loggin}" >auteur</span>
     			Tags associés : <span >Bubulle, first,noel,....</span>
     		</header>
     		<section >

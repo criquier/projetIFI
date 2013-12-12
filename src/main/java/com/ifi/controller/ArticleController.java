@@ -18,8 +18,10 @@ import com.ifi.repositories.CommentaireRepository;
 public class ArticleController {
        @Autowired
        private CommentaireRepository comRepository;
+       @Autowired
+       SessionBean sessionBean;
         @Autowired
-	private ArticleRepository repository;
+        private ArticleRepository repository;
         private Article article;
     
     
@@ -27,13 +29,16 @@ public class ArticleController {
     @RequestMapping(value="/ajouterArticle", method=RequestMethod.GET)
     public String ajouterArticleFormulaire(Model model){
 	// On l'ajoute dans la BD locale
+    model.addAttribute("sessionBean", sessionBean);
 	model.addAttribute("article", new Article());
 	return "article";
     }
     
     @RequestMapping(value="/ajouterArticle", method=RequestMethod.POST)
     public String ajouterArticleAfficher(@ModelAttribute Article article, Model model) {
+    	 article.setAuteur(sessionBean.getUser());
          model.addAttribute("article", article);
+         model.addAttribute("sessionBean", sessionBean);
          repository.save(article);
          this.article=article;
         return "articleTemplate";

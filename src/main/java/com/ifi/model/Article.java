@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Article {
+
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
   private long id;
@@ -29,10 +30,9 @@ public class Article {
   private List<Commentaire> commentaires=new ArrayList<Commentaire>();
    //Constructeurs
    public Article(){
-       SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+      SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
       Date today=new Date();
       date=formater.format(today);
-
      
    }
    public Article(long id,String titre, String contenu){
