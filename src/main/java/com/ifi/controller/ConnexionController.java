@@ -27,7 +27,7 @@ public class ConnexionController {
     @RequestMapping(value="/deconnexion", method=RequestMethod.GET)
     public String deconnexion(Model model){
     	sessionBean.setUser(null);
-		return "index";
+    	return "redirect:/";
     }
     
     @RequestMapping(value="/connexion", method=RequestMethod.POST)
