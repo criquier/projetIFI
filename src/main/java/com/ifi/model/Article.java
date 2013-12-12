@@ -30,7 +30,7 @@ public class Article {
   private List<Commentaire> commentaires=new ArrayList<Commentaire>();
    //Constructeurs
    public Article(){
-      SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+      SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
       Date today=new Date();
       date=formater.format(today);
      
