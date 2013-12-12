@@ -41,7 +41,7 @@ public class ArticleRepository {
         // Récupérer la liste de tous les articles
         public List<Article> findAll()
         {
-                Query query= this.entityManager.createQuery("select a from Article a");
+                Query query= this.entityManager.createQuery("select a from Article a order by a.date desc");
                 return query.getResultList();
         }
         // Supprimer un article

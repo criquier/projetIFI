@@ -3,19 +3,54 @@
 <head> 
     <title>Connexion</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="mainstyle.css" media="all"/>  
+    
 </head>
 <body>
-	<h1>Connexion</h1>
-	
-	
-	<p th:if="${message_error}" th:text="${message_error}">Vos identifiant sont incorrect</p>
-	
-	
-    <form action="#" th:action="@{/connexion}" th:object="${user}" method="post">
-        <p>Login : <input type="text" th:field="*{loggin}" /></p>
-        <p>Mot de passe <input type="password" th:field="*{password}" /></p>
-
-        <p><input type="submit" value="Se connecter" /> <input type="reset" value="Reset" /></p>
-    </form>
+	<section class="barreHaut">
+		<img src="guirlande.png" />
+    	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
+		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
+	</section>
+	<div class="bonnet">
+		<img src="bonnet.png" />
+	</div>
+	<section class="menu">
+		<section class="avatar">
+			<img src="avatar.jpeg" />
+		</section>
+		<section class="listMenu">
+		<p 	
+			th:if="${sessionBean}"
+			th:text="'Bienvenue ' + ${sessionBean.user.loggin}"></p>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
+				<li th:if="${sessionBean}"><a href="/ajouterArticle">Ajouter Article</a></li>
+				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
+			</ul>
+		</section>
+	</section>
+	<section class="corps">
+    	<header>
+    		<h1>Connexion</h1>
+    	</header>
+    	<article class="article">
+    		<section >
+    			<section class="messageErreur" th:if="${message_error}" th:text="${message_error}">Vos identifiant sont incorrect</section>	
+			    <form action="#" th:action="@{/connexion}" th:object="${user}" method="post">
+			        <p>Login : <input type="text" th:field="*{loggin}" /></p>
+			        <p>Mot de passe <input type="password" th:field="*{password}" /></p>
+			
+			        <p><input type="submit" value="Se connecter" /> <input type="reset" value="Reset" /></p>
+			    </form>
+    		</section>
+    	</article>
+    	<img class="boule2" src="boule2.png" />
+    </section>
+        
+    <div class="houx">
+    	<img src="houx.png" />
+    </div>
 </body>
 </html>

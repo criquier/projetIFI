@@ -32,15 +32,9 @@ public class MainController {
 	     // on ajoute la liste des aticles à la vue
 	     model.addAttribute("articles",articles);
 	     model.addAttribute("users",users);
-//	     System.out.println("-------------------------main "+sessionBean.getUser().getLoggin());
-	     if(sessionBean.isConnected() == false)
-	    	System.out.println("User non connecte");
-	     else{
-	    	 System.out.println("-------------------------main "+sessionBean.getUser().getLoggin());
-	    	 
-	     model.addAttribute("sessionBean",sessionBean);
 	     
-	     }
+	     if(sessionBean.isConnected())
+	    	 model.addAttribute("sessionBean",sessionBean);
 	    
 		return "index";
 	}
