@@ -20,7 +20,7 @@ public class Receiver {
      */
     public void receiveMessage(String message) {
         System.out.println("------------------------------ Message recu dans le Receive <" + message + ">");
-        context.close();
+       // context.close();
         FileSystemUtils.deleteRecursively(new File("activemq-data"));
     }
 }

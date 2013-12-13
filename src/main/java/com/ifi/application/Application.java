@@ -89,7 +89,7 @@ public class Application {
     }
 
     
-    static String mailboxDestination = "b11p6";
+    static String mailboxDestination = "mailbox-destination";
 
 	@Bean
 	ConnectionFactory connectionFactory() {
@@ -140,23 +140,23 @@ public class Application {
     	 MessageCreator messageCreator = new MessageCreator() {
  			@Override
  			public Message createMessage(Session session) throws JMSException {
- 				return session.createTextMessage("ping from Nordine!");
+ 				return session.createTextMessage("Ping par Maxime");
  			}
  		};
  		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
- 		System.out.println("-------------------Message envoyé par Jms !!!");
-// 		
-// 		//// A ajouter pour la version topic
-// 		final Destination destination = new Topic() {
-// 			
-// 			@Override
-// 			public String getTopicName() throws JMSException {
-// 				return mailboxDestination;
-// 			}
-// 		};
+ 		
+ 		
+ 		//// A ajouter pour la version topic
+ 		final Destination destination = new Topic() {
+ 			
+ 			@Override
+ 			public String getTopicName() throws JMSException {
+ 				return mailboxDestination;
+ 			}
+ 		};
  		////
- 		jmsTemplate.send("a11p6", messageCreator);
-
+ 		System.out.println("-------------------Envoi du message envoyé par Jms -----------------");
+ 		jmsTemplate.send(destination, messageCreator);
     	 
 
         //context.close();
