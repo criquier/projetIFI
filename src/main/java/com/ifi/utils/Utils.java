@@ -23,7 +23,7 @@ public class Utils {
         System.out.println("Customers found with findAll():");
         System.out.println("-------------------------------");
         for (User user : users) {
-            System.out.println(user.getId()+" "+user.getLoggin()+" "+user.getPassword());
+            System.out.println(user.getId()+" "+user.getLogin()+" "+user.getPassword());
         }
         System.out.println();
 		

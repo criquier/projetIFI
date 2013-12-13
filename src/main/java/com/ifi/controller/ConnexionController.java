@@ -37,8 +37,8 @@ public class ConnexionController {
     public String connexionValider(User user,Model model){
     	String message_error = new String("Identifiant incorrect");
     	
-		if(repository.existUser(user.getLoggin()) == true){
-			User userFind = repository.findByLoggin(user.getLoggin());
+		if(repository.existUser(user.getLogin()) == true){
+			User userFind = repository.findByLogin(user.getLogin());
 			if(userFind.getPassword().equals(user.getPassword())){
 				sessionBean.setUser(userFind);
 				return "redirect:/";

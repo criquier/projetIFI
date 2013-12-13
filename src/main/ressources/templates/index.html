@@ -22,7 +22,7 @@
 		<section class="listMenu">
 			<img class="cadreBienvenue" src="cadreBienvenue.png" />
 			<section class="contenuCadre">
-				<span class="bonjourX" th:if="${sessionBean}" th:text="'Bienvenue ' + ${sessionBean.user.loggin}"></span>
+				<span class="bonjourX" th:if="${sessionBean}" th:text="'Bienvenue ' + ${sessionBean.user.login}"></span>
 				<span class="bonjourX" th:unless="${sessionBean}" th:text="'Bienvenue sur le site de blog'"></span>
 			</section>
 			<ul>
@@ -42,7 +42,7 @@
     		<header>
     			<strong th:text="${article.titre}">Titre</strong><br/>
     			<span th:text="${article.date}"> Date </span>
-    			Auteur <span th:text="${article.auteur.loggin}" >auteur</span>
+    			Auteur <span th:text="${article.auteur.login}" >auteur</span>
     			Tags associés : <span >Bubulle, first,noel,....</span>
     		</header>
     		<section >

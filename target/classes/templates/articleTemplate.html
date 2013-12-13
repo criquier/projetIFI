@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Article</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="mainstyle.css" media="all"/>  
+    
+</head>
+<body>
+<section class="barreHaut">
+		<img src="guirlande.png" />
+    	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
+		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
+	</section>
+	<div class="bonnet">
+		<img src="bonnet.png" />
+	</div>
+	<section class="menu">
+		<section class="avatar">
+			<img src="avatar.jpeg" />
+		</section>
+		<section class="listMenu">
+		<p 	
+			th:if="${sessionBean}"
+			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
+				<li th:if="${sessionBean}"><a href="/ajouterArticle">Ajouter Article</a></li>
+				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
+			</ul>
+		</section>
+	</section>
+	<section class="corps">
+    	<header>
+			<h1></h1>
+    	</header>
+    	<article class="article">
+    		<header>
+			    <h1 th:text=" ${article.titre}"></h1>
+			     <span th:text="'Date: ' + ${article.date}"></span>
+			 </header>   
+			 <section>
+			     <p th:text="' ' + ${article.contenu}" />
+			 </section>
+			 <section>
+	    		<section class="commentaires" th:each="commentaire: ${article.commentaires}">
+	    			<header>
+			    		<span th:text="'Auteur : ' + ${commentaire.auteur.login}"></span>
+				     	<span th:text="'le: ' + ${commentaire.date}"> </span>
+	    			</header>
+	    			<section th:text="' ' + ${commentaire.contenu}">
+	    			</section>
+		     	</section>
+			    <form action="#" th:action="@{/ajouterCommentaire}"  method="post">
+			  		<section class="posteCommentaire">
+				         <input type="text" name="contenuCommentaire" />
+				         <!--   <textarea name="contenuCommentaire"> </textarea> -->
+				        <input type="submit" value="Publier" />
+			        </section>
+			    </form>
+    		</section>
+    	</article>
+    	<section class="actionSuivanteArticle">
+    		<a href="/ajouterArticle">Ajouter article</a>
+			<a href="/">Accueil</a>
+    	</section>
+    	<img class="boule2" src="boule2.png" />
+    </section>
+        
+    <div class="houx">
+    	<img src="houx.png" />
+    </div> 
+   
+</body>
+</html>
