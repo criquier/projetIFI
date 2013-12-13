@@ -24,6 +24,8 @@ public class UserController {
 	
 	    @RequestMapping(value="/inscription", method=RequestMethod.GET)
 	    public String inscriptionUser(Model model){
+	    	if(sessionBean.getUser() != null)
+	    		return "redirect:/";
 			model.addAttribute("user", new User());
 			return "inscription";
 	    }
@@ -40,7 +42,7 @@ public class UserController {
 		    		return "inscription";
 		    	}else{
 					repository.save(user);
-					System.out.println("-------- Login existe pas deka en base,  utilisateur bien enregistrer-------");
+					System.out.println("-------- Login existe pas deja en base,  utilisateur bien enregistrer-------");
 					model.addAttribute("user", user);
 					sessionBean.setUser(user);
 					return "inscriptionValider";
@@ -63,6 +65,8 @@ public class UserController {
 		@RequestMapping(value="/user/profil",method=RequestMethod.GET)
 		public String afficherUser( @RequestParam(value="id", required=true) String id, Model model)
 		{
+			if(sessionBean.getUser() == null)
+				return "redirect:/";
 			
 			User user = repository.findOne(Long.parseLong(id));
 			if(user != null){
@@ -79,6 +83,9 @@ public class UserController {
 		@RequestMapping(value="/user/profil/modifier", method=RequestMethod.POST)
 		public String modifierUser( @ModelAttribute User user, Model model)
 		{
+			if(sessionBean.getUser() == null)
+				return "redirect:/";
+			
 			long id = user.getId();
 			System.out.println("----------------------------User recupére:"+user.toString());
 				if(repository.update(user) == true){

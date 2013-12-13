@@ -16,18 +16,21 @@ import com.ifi.repositories.CommentaireRepository;
 
 @Controller
 public class ArticleController {
-       @Autowired
-       private CommentaireRepository comRepository;
-       @Autowired
-       SessionBean sessionBean;
-        @Autowired
-        private ArticleRepository repository;
-        private Article article;
+    @Autowired
+    private CommentaireRepository comRepository;
+    @Autowired
+    SessionBean sessionBean;
+    @Autowired
+    private ArticleRepository repository;
+    private Article article;
     
     
     //intercepte les ajouts d'article
     @RequestMapping(value="/ajouterArticle", method=RequestMethod.GET)
     public String ajouterArticleFormulaire(Model model){
+    	if(sessionBean.getUser() == null)
+			return "redirect:/";
+		
 	// On l'ajoute dans la BD locale
     model.addAttribute("sessionBean", sessionBean);
 	model.addAttribute("article", new Article());
@@ -36,6 +39,9 @@ public class ArticleController {
     
     @RequestMapping(value="/ajouterArticle", method=RequestMethod.POST)
     public String ajouterArticleAfficher(@ModelAttribute Article article, Model model) {
+    	if(sessionBean.getUser() == null)
+			return "redirect:/";
+		
     	 article.setAuteur(sessionBean.getUser());
          model.addAttribute("article", article);
          model.addAttribute("sessionBean", sessionBean);
@@ -53,13 +59,17 @@ public class ArticleController {
     //intercepte la suppression de l'article
     @RequestMapping("/supprimerArticle")
     public void supprimerArticle(@RequestParam(value="id", required=true) long id){
-	repository.delete(id);
+    	if(sessionBean.getUser() != null)
+    		repository.delete(id);
 	
     }
     //intercepte la consultation de l'article
     @RequestMapping("/consulterArticle")
     public String consulterArticle(@RequestParam(value="id", required=true) long id,
 	    Model model){
+    	if(sessionBean.getUser() == null)
+			return "redirect:/";
+		
 	this.article=repository.findById(id);
 	model.addAttribute("article",this.article);
         model.addAttribute("commentaires",this.article.getCommentaires());
@@ -70,7 +80,9 @@ public class ArticleController {
     @RequestMapping(value="/ajouterCommentaire", method=RequestMethod.POST)
     public String ajouterCommentaire(@RequestParam("contenuCommentaire") String commentaire,
 	    Model model) {
-	
+    	if(sessionBean.getUser() == null)
+			return "redirect:/";
+		
          // on ajoute le commentaire de l'article
 	Commentaire c=new Commentaire();
 	c.setAuteur(sessionBean.getUser());

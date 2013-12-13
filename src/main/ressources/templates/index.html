@@ -4,30 +4,30 @@
     <title>Accueil du Blog</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="mainstyle.css" media="all"/>  
-      
 </head>
 <body>
 	<section class="barreHaut">
 		<img src="guirlande.png" />
     	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
 		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
-	
-	<p th:if="${message_error}" th:text="${message_error}"></p>
     </section>
 	<div class="bonnet">
 		<img src="bonnet.png" />
 	</div>
 	<section class="menu">
-		<section class="avatar">
-			<img src="avatar.jpeg" />
+		<section>
+			<img class="cadre" src="cadre.png" />
+			<img class="avatar" src="avatar.jpeg" />
 		</section>
 		<section class="listMenu">
-		<p 	
-			th:if="${sessionBean}"
-			th:text="'Bienvenue ' + ${sessionBean.user.loggin}"></p>
+			<img class="cadreBienvenue" src="cadreBienvenue.png" />
+			<section class="contenuCadre">
+				<span class="bonjourX" th:if="${sessionBean}" th:text="'Bienvenue ' + ${sessionBean.user.loggin}"></span>
+				<span class="bonjourX" th:unless="${sessionBean}" th:text="'Bienvenue sur le site de blog'"></span>
+			</section>
 			<ul>
 				<li><a href="/">Accueil</a></li>
-				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
+				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier mon profil</a></li> 
 				<li th:if="${sessionBean}"><a href="/ajouterArticle">Ajouter Article</a></li>
 				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
 			</ul>

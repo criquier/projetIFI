@@ -7,6 +7,9 @@
     
 </head>
 <body>
+<!--  insertion de fichier html dans un autre
+	<object type="text/html" data="ma_page.html" width="500" height="500"></object>
+ -->
 	<section class="barreHaut">
 		<img src="guirlande.png" />
     	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
@@ -39,10 +42,9 @@
     		<section >
     			<section class="messageErreur" th:if="${message_error}" th:text="${message_error}">Vos identifiant sont incorrect</section>	
 			    <form action="#" th:action="@{/connexion}" th:object="${user}" method="post">
-			        <p>Login : <input type="text" th:field="*{loggin}" /></p>
-			        <p>Mot de passe <input type="password" th:field="*{password}" /></p>
-			
-			        <p><input type="submit" value="Se connecter" /> <input type="reset" value="Reset" /></p>
+			        <p><label>Login </label>:<input type="text" th:field="*{loggin}" /></p>
+			        <p><label>Mot de passe </label>:<input type="password" th:field="*{password}" /></p>
+			        <p><input type="submit" value="Se connecter" /> <input type="reset" value="Annuler" /></p>
 			    </form>
     		</section>
     	</article>

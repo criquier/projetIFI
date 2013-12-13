@@ -20,6 +20,9 @@ public class ConnexionController {
     
     @RequestMapping(value="/connexion", method=RequestMethod.GET)
     public String connexion(Model model){
+    	if(sessionBean.getUser() != null)
+    		return "redirect:/";
+    	
     	model.addAttribute("user", new User());
 		return "connexion";
     }
@@ -39,13 +42,9 @@ public class ConnexionController {
 			if(userFind.getPassword().equals(user.getPassword())){
 				sessionBean.setUser(userFind);
 				return "redirect:/";
-			}else{
-				model.addAttribute("message_error", message_error);
-				return "connexion";
 			}
-		}else{
-				model.addAttribute("message_error", message_error);
-				return "connexion";
-			}	
+		}
+		model.addAttribute("message_error", message_error);
+		return "connexion";
     }   
 }
