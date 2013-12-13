@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Accueil du Blog</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="mainstyle.css" media="all"/>  
+      
+</head>
+<body>
+	<section class="barreHaut">
+		<img src="guirlande.png" />
+    	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
+		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
+	
+	<p th:if="${message_error}" th:text="${message_error}"></p>
+    </section>
+	<div class="bonnet">
+		<img src="bonnet.png" />
+	</div>
+	<section class="menu">
+		<section class="avatar">
+			<img src="avatar.jpeg" />
+		</section>
+		<section class="listMenu">
+		<p 	
+			th:if="${sessionBean}"
+			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
+				<li th:if="${sessionBean}"><a href="/ajouterArticle">Ajouter Article</a></li>
+				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
+			</ul>
+		</section>
+	</section>
+	
+ <section class="corps">
+    	<img class="houxArticle" src="houxArticle.png" />
+    	<header>
+	    	<h1>Création d'Article</h1>
+    	</header>
+    	<section class="article">
+		    <form action="#" th:action="@{/ajouterArticle}" th:object="${article}" method="post">
+		       	<!-- <p>Id: <input type="text" th:field="*{id}" /></p>-->
+		         <p>
+			         Titre: 
+			         <br/>
+			         <input type="text" th:field="*{titre}" />
+			         <br/>
+			         <br/>	         
+			         <label name="contenu">Contenu:</label><br/>
+			         <textarea id="contenu" th:field="*{contenu}"></textarea>
+		          </p>
+		         <!--   <p>Auteur: <input type="text" th:field="*{auteurs}" /></p> -->
+		        <p><input type="submit" value="Créer" /><input type="reset" value="Annuler" /></p>
+		    </form>
+		    <img class="boule" src="boule.png" />
+		</section>
+    </section>
+        
+    <div class="houx">
+    	<img src="houx.png" />
+    </div>
+</body>
+</html>
