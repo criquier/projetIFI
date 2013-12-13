@@ -24,7 +24,7 @@
 		<section class="listMenu">
 		<p 	
 			th:if="${sessionBean}"
-			th:text="'Bienvenue ' + ${sessionBean.user.loggin}"></p>
+			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
 			<ul>
 				<li><a href="/">Accueil</a></li>
 				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
@@ -42,7 +42,7 @@
     		<header>
     			<strong th:text="${article.titre}">Titre</strong><br/>
     			<span th:text="${article.date}"> Date </span>
-    			Auteur <span th:text="${article.auteur.loggin}" >auteur</span>
+    			Auteur <span th:text="${article.auteur.login}" >auteur</span>
     			Tags associés : <span >Bubulle, first,noel,....</span>
     		</header>
     		<section >

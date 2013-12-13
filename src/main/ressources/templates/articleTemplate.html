@@ -22,7 +22,7 @@
 		<section class="listMenu">
 		<p 	
 			th:if="${sessionBean}"
-			th:text="'Bienvenue ' + ${sessionBean.user.loggin}"></p>
+			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
 			<ul>
 				<li><a href="/">Accueil</a></li>
 				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
@@ -46,7 +46,7 @@
 			 <section>
 	    		<section class="commentaires" th:each="commentaire: ${article.commentaires}">
 	    			<header>
-			    		<span th:text="'Auteur : ' + ${commentaire.auteur.loggin}"></span>
+			    		<span th:text="'Auteur : ' + ${commentaire.auteur.login}"></span>
 				     	<span th:text="'le: ' + ${commentaire.date}"> </span>
 	    			</header>
 	    			<section th:text="' ' + ${commentaire.contenu}">

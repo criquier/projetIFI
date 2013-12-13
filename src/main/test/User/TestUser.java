@@ -39,7 +39,7 @@ public class TestUser {
 	@Test
 	public void testSamelogin()
 	{
-		assertTrue(UserAll.getLoggin().equals(Userbis.getLoggin()));
+		assertTrue(UserAll.getLogin().equals(Userbis.getLogin()));
 	}
 	@Test
 	public void testDifferentmdp()
@@ -54,7 +54,7 @@ public class TestUser {
 	@Test
 	public void testSameUser()
 	{
-		assertTrue(UserAll.getLoggin().equals(Userbis.getLoggin())&& UserAll.getPassword().equals(Userbis.getPassword()));
+		assertTrue(UserAll.getLogin().equals(Userbis.getLogin())&& UserAll.getPassword().equals(Userbis.getPassword()));
 	}
 
 }

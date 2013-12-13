@@ -22,7 +22,7 @@
 		<section class="listMenu">
 		<p 	
 			th:if="${sessionBean}"
-			th:text="'Bienvenue ' + ${sessionBean.user.loggin}"></p>
+			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
 			<ul>
 				<li><a href="/">Accueil</a></li>
 				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
@@ -39,7 +39,7 @@
     		<section >
     			<section class="messageErreur" th:if="${message_error}" th:text="${message_error}">Vos identifiant sont incorrect</section>	
 			    <form action="#" th:action="@{/connexion}" th:object="${user}" method="post">
-			        <p>Login : <input type="text" th:field="*{loggin}" /></p>
+			        <p>Login : <input type="text" th:field="*{login}" /></p>
 			        <p>Mot de passe <input type="password" th:field="*{password}" /></p>
 			
 			        <p><input type="submit" value="Se connecter" /> <input type="reset" value="Reset" /></p>

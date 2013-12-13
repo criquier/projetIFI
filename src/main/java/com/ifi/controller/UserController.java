@@ -31,16 +31,16 @@ public class UserController {
 	    @RequestMapping(value="/enregistrementUser", method=RequestMethod.POST)
 	    public String validationInscriptionUser(@ModelAttribute User user, Model model) {
 	    	String message_error = new String("Ce login existe deja");
-	    	if(!user.getLoggin().equals("") && !user.getPassword().equals("")) 
-		    	if(repository.existUser(user.getLoggin())==true){
-		    		System.out.println("String validationInscriptionUser-------- Login existe deja-------");
+	    	if(!user.getLogin().equals("") && !user.getPassword().equals("")) 
+		    	if(repository.existUser(user.getLogin())==true){
+		    		System.out.println("String validationInscriptionUser-------- Login existe déjà-------");
 		    		User u = new User();
 		    		model.addAttribute("message_error", message_error);
 		    		model.addAttribute("user", u);
 		    		return "inscription";
 		    	}else{
 					repository.save(user);
-					System.out.println("-------- Login existe pas deka en base,  utilisateur bien enregistrer-------");
+					System.out.println("-------- Login existe pas déjà en base,  utilisateur bien enregistré-------");
 					model.addAttribute("user", user);
 					sessionBean.setUser(user);
 					return "inscriptionValider";
@@ -53,10 +53,10 @@ public class UserController {
 	    }
 		
 		@RequestMapping("/save")
-		public @ResponseBody String save( @RequestParam(value="loggin", required=true) String loggin,
+		public @ResponseBody String save( @RequestParam(value="login", required=true) String login,
 				 @RequestParam(value="password", required=false, defaultValue="ce1mdpp") String password)
 		{
-			repository.save(new User(loggin,password));
+			repository.save(new User(login,password));
 			return "saved";
 		}
 		
