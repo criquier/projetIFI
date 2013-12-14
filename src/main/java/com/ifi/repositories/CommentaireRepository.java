@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ifi.model.Commentaire;
@@ -25,6 +27,8 @@ public class CommentaireRepository {
 		
 	}
 	// Sauvegarder un Commentaire
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRES_NEW)
+        @Modifying(clearAutomatically = true)
 	public void save(Commentaire commentaire)
 	{
 	    this.entityManager.persist(commentaire);

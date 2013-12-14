@@ -27,7 +27,7 @@ public class MainController {
 	     List<Article> articles=(List<Article>) articleRepository.findAll();
 	     List<User> users=userRepository.findAll();
 	     // on ajoute la liste des aticles à la vue
-	     model.addAttribute("articles",articles);
+	     model.addAttribute("listarticles",articles);
 	     model.addAttribute("users",users);
 		return "index";
 	}

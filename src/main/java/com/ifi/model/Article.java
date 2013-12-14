@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -25,8 +25,12 @@ public class Article {
   private String date;
   @ManyToOne
   private User auteur;
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany
   private List<Commentaire> commentaires=new ArrayList<Commentaire>();
+  
+  @ManyToMany
+  private List<Tag> tags=new ArrayList<Tag>();
+  
    //Constructeurs
    public Article(){
        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
@@ -85,7 +89,12 @@ public class Article {
     public void setCommentaires(List<Commentaire> commentaires) {
         this.commentaires = commentaires;
     }
-
+    public List<Tag> getTags() {
+        return tags;
+    }
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
     
     
     

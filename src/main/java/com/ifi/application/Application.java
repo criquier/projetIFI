@@ -21,9 +21,13 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 
 import com.ifi.repositories.ArticleRepository;
 import com.ifi.repositories.CommentaireRepository;
+import com.ifi.repositories.TagRepository;
 import com.ifi.repositories.UserRepository;
 import com.ifi.utils.Utils;
 
@@ -32,6 +36,7 @@ import com.ifi.utils.Utils;
 @EnableTransactionManagement
 @EnableAutoConfiguration(exclude={HibernateJpaAutoConfiguration.class})
 @ComponentScan(basePackages="com.ifi.controller")
+
 public class Application {
     
     @Bean
@@ -56,6 +61,7 @@ public class Application {
         hibernateJpaVendorAdapter.setDatabase(Database.H2);
         return hibernateJpaVendorAdapter;
     }
+    
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
@@ -75,7 +81,23 @@ public class Application {
     public CommentaireRepository commentaireRepository(){
     	return new CommentaireRepository();
     }
-
+ 
+    
+    @Bean
+    public TagRepository tagRepository(){
+    	return new TagRepository();
+    }
+    
+    //Permet de gerer la partie web service REST
+    @Bean
+    public ViewResolver getContentNegotiatingViewResolver(
+        ContentNegotiationManager manager) {
+        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+        resolver.setContentNegotiationManager(manager);
+    return resolver;
+}
+    
+    
     public static void main(String[] args) {
        // AbstractApplicationContext context = new AnnotationConfigApplicationContext(Application.class,args);
     	// SpringApplication.run(Application.class, args);

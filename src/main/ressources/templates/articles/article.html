@@ -7,12 +7,20 @@
 </head>
 <body>
 	<h1>Création d'Article</h1>
-    <form action="#" th:action="@{/ajouterArticle}" th:object="${article}" method="post">
+    <form action="#" th:action="@{ajouterArticle}" th:object="${article}" method="post">
         <p>Titre: <input type="text" th:field="*{titre}" /></p>
          <p>Date: <input type="text" th:field="*{date}" /></p>
          <p>Contenu:
          <textarea th:field="*{contenu}"></textarea>
          </p>
+        
+           	<span th:each="tag:${TAGS}">
+           	    <!-- <input type="text" th:field="*{tags[__${tagStat.index}__].id}" th:value="${tag.id}" th:text="${tag.id}"/> -->
+	           <input type="checkbox" name="checked"  th:value="${tag.contenu}" th:text="${tag.contenu}" />
+	         
+    		</span> 
+         
+         
          <!--   <p>Auteur: <input type="text" th:field="*{auteurs}" /></p> -->
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
