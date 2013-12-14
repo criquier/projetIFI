@@ -157,6 +157,7 @@ public class Application {
  		////
  		System.out.println("-------------------Envoi du message envoyé par Jms -----------------");
  		jmsTemplate.send(destination, messageCreator);
+ 		
     	 
 
         //context.close();
