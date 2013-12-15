@@ -928,3 +928,96 @@ java.io.FileNotFoundException: ../../webapps/hawtio
 	at java.lang.reflect.Method.invoke(Method.java:606)
 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
 	at java.lang.Thread.run(Thread.java:724)
+2013-12-16 00:53:45,127 | INFO  | Apache ActiveMQ 5.9.0 (localhost, ID:gens-ubuntu-42397-1387149503751-0:1) is shutting down | org.apache.activemq.broker.BrokerService | Thread-23
+2013-12-16 00:53:45,958 | INFO  | Connector openwire stopped | org.apache.activemq.broker.TransportConnector | Thread-23
+2013-12-16 00:53:45,964 | INFO  | Connector amqp stopped | org.apache.activemq.broker.TransportConnector | Thread-23
+2013-12-16 00:53:47,966 | INFO  | Connector stomp stopped | org.apache.activemq.broker.TransportConnector | Thread-23
+2013-12-16 00:53:47,981 | INFO  | Connector mqtt stopped | org.apache.activemq.broker.TransportConnector | Thread-23
+2013-12-16 00:53:48,048 | INFO  | Connector ws stopped | org.apache.activemq.broker.TransportConnector | Thread-23
+2013-12-16 00:53:48,054 | INFO  | PListStore:[/home/gens/git/projetIFI/apache-activemq-5.9.0/bin/linux-x86-64/../../data/localhost/tmp_storage] stopped | org.apache.activemq.store.kahadb.plist.PListStoreImpl | Thread-23
+2013-12-16 00:53:48,055 | INFO  | Stopping async queue tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-23
+2013-12-16 00:53:48,056 | INFO  | Stopping async topic tasks | org.apache.activemq.store.kahadb.KahaDBStore | Thread-23
+2013-12-16 00:53:48,059 | INFO  | Stopped KahaDB | org.apache.activemq.store.kahadb.KahaDBStore | Thread-23
+2013-12-16 00:53:48,219 | INFO  | Apache ActiveMQ 5.9.0 (localhost, ID:gens-ubuntu-42397-1387149503751-0:1) uptime 35 minutes | org.apache.activemq.broker.BrokerService | Thread-23
+2013-12-16 00:53:48,220 | INFO  | Apache ActiveMQ 5.9.0 (localhost, ID:gens-ubuntu-42397-1387149503751-0:1) is shutdown | org.apache.activemq.broker.BrokerService | Thread-23
+2013-12-16 00:53:48,221 | INFO  | Closing org.apache.activemq.xbean.XBeanBrokerFactory$1@38638273: startup date [Mon Dec 16 00:18:22 CET 2013]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | Thread-23
+2013-12-16 00:53:53,045 | INFO  | Refreshing org.apache.activemq.xbean.XBeanBrokerFactory$1@276b998f: startup date [Mon Dec 16 00:53:53 CET 2013]; root of context hierarchy | org.apache.activemq.xbean.XBeanBrokerFactory$1 | WrapperSimpleAppMain
+2013-12-16 00:53:54,217 | INFO  | PListStore:[/home/gens/git/projetIFI/apache-activemq-5.9.0/bin/linux-x86-64/../../data/localhost/tmp_storage] started | org.apache.activemq.store.kahadb.plist.PListStoreImpl | WrapperSimpleAppMain
+2013-12-16 00:53:54,250 | INFO  | Using Persistence Adapter: KahaDBPersistenceAdapter[/home/gens/git/projetIFI/apache-activemq-5.9.0/bin/linux-x86-64/../../data/kahadb] | org.apache.activemq.broker.BrokerService | WrapperSimpleAppMain
+2013-12-16 00:53:54,582 | INFO  | KahaDB is version 5 | org.apache.activemq.store.kahadb.MessageDatabase | WrapperSimpleAppMain
+2013-12-16 00:53:54,615 | INFO  | Recovering from the journal ... | org.apache.activemq.store.kahadb.MessageDatabase | WrapperSimpleAppMain
+2013-12-16 00:53:54,750 | INFO  | Recovery replayed 3406 operations from the journal in 0.15 seconds. | org.apache.activemq.store.kahadb.MessageDatabase | WrapperSimpleAppMain
+2013-12-16 00:53:54,915 | INFO  | Apache ActiveMQ 5.9.0 (localhost, ID:gens-ubuntu-46769-1387151634786-0:1) is starting | org.apache.activemq.broker.BrokerService | WrapperSimpleAppMain
+2013-12-16 00:53:54,943 | INFO  | Listening for connections at: tcp://gens-ubuntu:61616?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | WrapperSimpleAppMain
+2013-12-16 00:53:54,946 | INFO  | Connector openwire started | org.apache.activemq.broker.TransportConnector | WrapperSimpleAppMain
+2013-12-16 00:53:54,950 | INFO  | Listening for connections at: amqp://gens-ubuntu:5672?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | WrapperSimpleAppMain
+2013-12-16 00:53:54,953 | INFO  | Connector amqp started | org.apache.activemq.broker.TransportConnector | WrapperSimpleAppMain
+2013-12-16 00:53:54,957 | INFO  | Listening for connections at: stomp://gens-ubuntu:61613?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | WrapperSimpleAppMain
+2013-12-16 00:53:54,958 | INFO  | Connector stomp started | org.apache.activemq.broker.TransportConnector | WrapperSimpleAppMain
+2013-12-16 00:53:54,962 | INFO  | Listening for connections at: mqtt://gens-ubuntu:1883?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.TransportServerThreadSupport | WrapperSimpleAppMain
+2013-12-16 00:53:54,964 | INFO  | Connector mqtt started | org.apache.activemq.broker.TransportConnector | WrapperSimpleAppMain
+2013-12-16 00:54:00,101 | INFO  | Listening for connections at ws://gens-ubuntu:61614?maximumConnections=1000&wireFormat.maxFrameSize=104857600 | org.apache.activemq.transport.ws.WSTransportServer | WrapperSimpleAppMain
+2013-12-16 00:54:00,102 | INFO  | Connector ws started | org.apache.activemq.broker.TransportConnector | WrapperSimpleAppMain
+2013-12-16 00:54:00,104 | INFO  | Apache ActiveMQ 5.9.0 (localhost, ID:gens-ubuntu-46769-1387151634786-0:1) started | org.apache.activemq.broker.BrokerService | WrapperSimpleAppMain
+2013-12-16 00:54:00,105 | INFO  | For help or more information please see: http://activemq.apache.org | org.apache.activemq.broker.BrokerService | WrapperSimpleAppMain
+2013-12-16 00:54:00,105 | WARN  | Store limit is 102400 mb, whilst the data directory: /home/gens/git/projetIFI/apache-activemq-5.9.0/bin/linux-x86-64/../../data/kahadb only has 8275 mb of usable space - resetting to maximum available disk space: 8275 mb | org.apache.activemq.broker.BrokerService | WrapperSimpleAppMain
+2013-12-16 00:54:00,107 | ERROR | Temporary Store limit is 51200 mb, whilst the temporary data directory: /home/gens/git/projetIFI/apache-activemq-5.9.0/bin/linux-x86-64/../../data/localhost/tmp_storage only has 8275 mb of usable space - resetting to maximum available 8275 mb. | org.apache.activemq.broker.BrokerService | WrapperSimpleAppMain
+2013-12-16 00:54:00,328 | WARN  | Web application not found ../../webapps/hawtio | org.eclipse.jetty.webapp.WebInfConfiguration | WrapperSimpleAppMain
+2013-12-16 00:54:00,331 | WARN  | Failed startup of context o.e.j.w.WebAppContext{/hawtio,null},../../webapps/hawtio | org.eclipse.jetty.webapp.WebAppContext | WrapperSimpleAppMain
+java.io.FileNotFoundException: ../../webapps/hawtio
+	at org.eclipse.jetty.webapp.WebInfConfiguration.unpack(WebInfConfiguration.java:502)
+	at org.eclipse.jetty.webapp.WebInfConfiguration.preConfigure(WebInfConfiguration.java:71)
+	at org.eclipse.jetty.webapp.WebAppContext.preConfigure(WebAppContext.java:443)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:479)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.security.SecurityHandler.doStart(SecurityHandler.java:381)
+	at org.eclipse.jetty.security.ConstraintSecurityHandler.doStart(ConstraintSecurityHandler.java:233)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:279)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1608)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1549)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1479)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:295)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:223)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:292)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:628)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:479)
+	at org.apache.xbean.spring.context.ResourceXmlApplicationContext.<init>(ResourceXmlApplicationContext.java:64)
+	at org.apache.xbean.spring.context.ResourceXmlApplicationContext.<init>(ResourceXmlApplicationContext.java:52)
+	at org.apache.activemq.xbean.XBeanBrokerFactory$1.<init>(XBeanBrokerFactory.java:104)
+	at org.apache.activemq.xbean.XBeanBrokerFactory.createApplicationContext(XBeanBrokerFactory.java:104)
+	at org.apache.activemq.xbean.XBeanBrokerFactory.createBroker(XBeanBrokerFactory.java:67)
+	at org.apache.activemq.broker.BrokerFactory.createBroker(BrokerFactory.java:71)
+	at org.apache.activemq.broker.BrokerFactory.createBroker(BrokerFactory.java:54)
+	at org.apache.activemq.console.command.StartCommand.runTask(StartCommand.java:87)
+	at org.apache.activemq.console.command.AbstractCommand.execute(AbstractCommand.java:57)
+	at org.apache.activemq.console.command.ShellCommand.runTask(ShellCommand.java:150)
+	at org.apache.activemq.console.command.AbstractCommand.execute(AbstractCommand.java:57)
+	at org.apache.activemq.console.command.ShellCommand.main(ShellCommand.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.activemq.console.Main.runTaskClass(Main.java:262)
+	at org.apache.activemq.console.Main.main(Main.java:115)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
+	at java.lang.Thread.run(Thread.java:724)
