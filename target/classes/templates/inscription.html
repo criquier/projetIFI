@@ -16,13 +16,16 @@
 		<img src="bonnet.png" />
 	</div>
 	<section class="menu">
-		<section class="avatar">
-			<img src="avatar.jpeg" />
+		<section>
+			<img class="cadre" src="cadre.png" />
+			<img class="avatar" src="avatar.jpeg" />
 		</section>
 		<section class="listMenu">
-		<p 	
-			th:if="${sessionBean}"
-			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
+			<img class="cadreBienvenue" src="cadreBienvenue.png" />
+			<section class="contenuCadre">
+				<span class="bonjourX" th:if="${sessionBean}" th:text="'Bienvenue ' + ${sessionBean.user.login}"></span>
+				<span class="bonjourX" th:unless="${sessionBean}" th:text="'Bienvenue sur le site de blog'"></span>
+			</section>
 			<ul>
 				<li><a href="/">Accueil</a></li>
 				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 

@@ -3,7 +3,7 @@
 <head> 
     <title>Accueil du Blog</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="mainstyle.css" media="all"/>  
+    <link rel="stylesheet" href="../mainstyle.css" media="all"/>  
       
 </head>
 <body>
@@ -15,27 +15,32 @@
 	<p th:if="${message_error}" th:text="${message_error}"></p>
     </section>
 	<div class="bonnet">
-		<img src="bonnet.png" />
+		<img src="../bonnet.png" />
 	</div>
 	<section class="menu">
-		<section class="avatar">
-			<img src="avatar.jpeg" />
+		<section>
+			<img class="cadre" src="../cadre.png" />
+			<img class="avatar" src="../avatar.jpeg" />
 		</section>
 		<section class="listMenu">
-		<p 	
-			th:if="${sessionBean}"
-			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
+			<img class="cadreBienvenue" src="../cadreBienvenue.png" />
+			<section class="contenuCadre">
+				<strong>
+					<span class="bonjourX" th:if="${sessionBean}" th:text="'Bienvenue ' + ${sessionBean.user.login}"></span>
+					<span class="bonjourX" th:unless="${sessionBean}" th:text="'Bienvenue sur le site de blog'"></span>
+				</strong>
+			</section>
 			<ul>
 				<li><a href="/">Accueil</a></li>
 				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
-				<li th:if="${sessionBean}"><a href="articles/ajouterArticle">Ajouter Article</a></li>
+				<li th:if="${sessionBean}"><a href="articles/ajouterArticle" >Ajouter Article</a></li>
 				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
 			</ul>
 		</section>
 	</section>
 	
  <section class="corps">
-    	<img class="houxArticle" src="houxArticle.png" />
+    	<img class="houxArticle" src="../houxArticle.png" />
     	<header>
 	    	<h1>Création d'Article</h1>
     	</header>
@@ -59,12 +64,12 @@
 		         <!--   <p>Auteur: <input type="text" th:field="*{auteurs}" /></p> -->
 		        <p><input type="submit" value="Créer" /><input type="reset" value="Annuler" /></p>
 		    </form>
-		    <img class="boule" src="boule.png" />
+		    <img class="boule" src="../boule.png" />
 		</section>
     </section>
         
     <div class="houx">
-    	<img src="houx.png" />
+    	<img src="../houx.png" />
     </div>
 </body>
 </html>

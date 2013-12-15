@@ -23,7 +23,7 @@ body{
 
 ul {
 	list-style: none;
-	padding-top:20%;
+	padding-top:25%;
 }
 
 li{
@@ -34,7 +34,7 @@ li{
 	height:5%;
 	border-bottom:1px solid gray;
 	position:relative;
-    margin-left:-8%;
+    margin-left:-12%;
     height: 100%; 
 }
   
@@ -69,6 +69,25 @@ a{
 	font-size:1.2em;
 	margin-left:2%;
 	text-align:center;
+}
+
+
+.recherche{
+	width:80%;
+	margin-left:8%;
+	background-color:rgba(255,255,255,0.5);
+	border-radius:10px;
+	padding: 0% 2% 1% 2%;
+	margin-bottom:2%;	
+}
+
+section > h1{
+	padding-top:2%;
+	text-align:center;
+}
+
+.rechercheAuteur{
+	width:-10%;
 }
 
 div[class*="bonnet"] > img{
@@ -116,9 +135,10 @@ div[class*="houx"] > img{
 
 .contenuCadre{
 	width: 70%;
-	margin-left:20%;
+	margin-left:15%;
 	font-decoration:bold;
 	margin-top:80%;
+	text-align:center;
 }
 
 .messageErreur{
@@ -173,11 +193,12 @@ section[class*="barreHaut"] > a{
 
 .boule{
 	width:15%;
-	height:15%;
-	z-index:0;
-	margin-left:2%;
+	height:25%;
+	z-index:1;
+	margin-left:1%;
 	margin-bottom:2%;
-	position:relative;
+	position:absolute;
+	top:72%;
 }
 
 .houxArticle{
@@ -247,6 +268,7 @@ article[class*="article"] > section > p{
 section[class*="article"] > form{
 	margin-top:5%;
 	margin-left:15%;
+	z-index:5;
 }
 
 article[class*="article"] > section > form > p{
@@ -262,7 +284,13 @@ article[class*="article"] > section > form > p > label{
 	
 }
 
-article[class*="article"] > section > form > p > input{
+article[class*="article"] > footer{
+	margin-top:5%;
+	border-top:1px solid darkgreen;
+}
+
+
+article[class*="article"] > section > form > p > input[type*="text"] , article[class*="article"] > section > form > p > input[type*="password"]{
 	position:absolute;
 	right:0;
 	margin-right:1%;
@@ -279,12 +307,30 @@ section[class*="actionSuivanteArticle"] > a{
 	background-color:rgba(255,255,255,0.5);
 }
 
-.posteCommentaire{
-	
+.tag{
+	color:rbg(27,79,8);
 }
 
-.commentaire{
-	
+.commentaires{
+	padding-top:1%;
+	padding-bottom:1%;
+	border-bottom:1px solid darkgreen;
+	background-color:rgba(198,8,0,0.1);
+}
+
+section[class*="commentaires"] > section {
+	background-color: rgba(255,255,255,0.5);
+	display:inline-block;
+	vertical-align:top;
+	width:80%;
+}
+
+section[class*="commentaires"]:FIRST-CHILD, section[class*="commentaires"]:last-child {
+	color: rgb(17,79,8);
+}
+
+.dateCommentaire{
+	font-size:0.7em;
 }
 
 section[class*="actionSuivanteArticle"] > a:hover{

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +42,7 @@ public class ArticleController {
 			return "redirect:/";
 		
 	// On l'ajoute dans la BD locale
-    model.addAttribute("sessionBean", sessionBean);
+        model.addAttribute("sessionBean", sessionBean);
 	model.addAttribute("article", new Article());
 	model.addAttribute("TAGS", this.tagRepository.findAll());
 	return "articles/article";
@@ -99,7 +98,7 @@ public class ArticleController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String consulterArticle(@PathVariable String id,
 	    Model model){
-
+	model.addAttribute("sessionBean", sessionBean);
 	this.article=repository.findById(Long.parseLong(id));
 	 System.out.println("ARTICLE:"+this.article.getTitre());
     	if(sessionBean.getUser() == null)

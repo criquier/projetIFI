@@ -9,27 +9,7 @@
 	<section class="barreHaut">
 		<img src="guirlande.png" />
 		<!-- Filter l'affichage -->
-		<form action="#" th:action="@{filter}"  th:object="${selector}" method="post">
-			     <label name="action">Afficher Par:</label>
-			     <select th:field="*{action}" name="action">
-  					<option value="Les plus recent">Les plus récents</option>
-  					<option value="Auteur">Auteur</option>
-  					<option value="Tag">Tags</option>
-				</select>  
-				
-			     <label name="filtre">Tag:</label>
-			     
-			     <select th:field="*{tag}">
-			       <option value="tous">Tous</option>
-  					<option th:each="t : ${tags}" 
-          			th:value="${t.contenu}" 
-          			th:text="${t.contenu}">Contenu</option>
-				</select>
-				<label name="Auteur">Auteur:</label>
-				<input type="text" th:field="*{auteur}" />  
-		         <input type="submit" value="Afficher" />
-		    </form>
-    	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
+		<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
 		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
     </section>
 	<div class="bonnet">
@@ -43,8 +23,10 @@
 		<section class="listMenu">
 			<img class="cadreBienvenue" src="cadreBienvenue.png" />
 			<section class="contenuCadre">
-				<span class="bonjourX" th:if="${sessionBean}" th:text="'Bienvenue ' + ${sessionBean.user.login}"></span>
-				<span class="bonjourX" th:unless="${sessionBean}" th:text="'Bienvenue sur le site de blog'"></span>
+				<strong>
+					<span class="bonjourX" th:if="${sessionBean}" th:text="'Bienvenue ' + ${sessionBean.user.login}"></span>
+					<span class="bonjourX" th:unless="${sessionBean}" th:text="'Bienvenue sur le site de blog'"></span>
+				</strong>
 			</section>
 			<ul>
 				<li><a href="/">Accueil</a></li>
@@ -59,21 +41,47 @@
     	<header>
 	    	<h1>Bienvenue sur notre blog</h1>
     	</header>
+    	<section class="recherche">
+    		<h1>Filtre</h1>
+	    	<form action="#" th:action="@{filter}"  th:object="${selector}" method="post">
+				<label name="action">Afficher Par:</label>
+				     <select th:field="*{action}">
+	  					<option value="Les plus recent">Les plus récents</option>
+	  					<option value="Auteur">Auteur</option>
+	  					<option value="Tag">Tags</option>
+					</select>     
+				     <label name="filtre">Tag:</label>
+				     <select th:field="*{tag}">
+	  					<option th:each="t : ${tags}" 
+	          			th:value="${t.contenu}" 
+	          			th:text="${t.contenu}">Contenu</option>
+					</select><br/>
+					<label name="Auteur">Auteur:</label>
+					<input class="rechercheAuteur" type="text" th:field="*{auteur}" />  
+			         <input type="submit" value="Afficher" />
+			    </form>
+    	</section>
     	<article class="article" th:each="article: ${articles}">
     		<header>
     			<strong th:text="${article.titre}">Titre</strong><br/>
     			<span th:text="${article.date}"> Date </span>
-    			Auteur <span th:text="${article.auteur.login}" >auteur</span>
-    			Tags associés : 
-    			<span th:each="tag:${article.tags}">
-    				<span th:text="${tag.contenu}"> tag </span> 
-    		   </span>
-    		</header>
+    			<span th:text="'par '+${article.auteur.login}" >auteur</span>
+   			</header>
     		<section >
     			<p th:text="${article.contenu}">
     				contenu
     			</p>
+    	   		<section class="actionSuivanteArticle">
+    				<a href="articles/consulter" th:href="@{'articles/'+${article.id}}">plus</a>
+    			</section>	
     		</section>
+    		<footer>
+    		Tags: 
+    			<span th:each="tag:${article.tags}">
+    				<span class="tag" th:text="${tag.contenu}"> tag </span> 
+    		   </span>
+    		
+    		</footer>
     	</article>
     	<img class="boule2" src="boule2.png" />
     </section>

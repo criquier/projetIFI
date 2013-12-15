@@ -3,26 +3,31 @@
 <head> 
     <title>Article</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="mainstyle.css" media="all"/>  
+    <link rel="stylesheet" href="../mainstyle.css" media="all"/>  
     
 </head>
 <body>
 <section class="barreHaut">
-		<img src="guirlande.png" />
+		<img src="../guirlande.png" />
     	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
 		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
 	</section>
 	<div class="bonnet">
-		<img src="bonnet.png" />
+		<img src="../bonnet.png" />
 	</div>
 	<section class="menu">
-		<section class="avatar">
-			<img src="avatar.jpeg" />
+	<section>
+			<img class="cadre" src="../cadre.png" />
+			<img class="avatar" src="../avatar.jpeg" />
 		</section>
 		<section class="listMenu">
-		<p 	
-			th:if="${sessionBean}"
-			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
+			<img class="cadreBienvenue" src="../cadreBienvenue.png" />
+			<section class="contenuCadre">
+				<strong>
+					<span class="bonjourX" th:if="${sessionBean}" th:text="'Bienvenue ' + ${sessionBean.user.login}"></span>
+					<span class="bonjourX" th:unless="${sessionBean}" th:text="'Bienvenue sur le site de blog'"></span>
+				</strong>
+			</section>
 			<ul>
 				<li><a href="/">Accueil</a></li>
 				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
@@ -32,33 +37,35 @@
 		</section>
 	</section>
 	<section class="corps">
-    	<header>
+		<header>
 			<h1></h1>
-    	</header>
+		</header>
     	<article class="article">
     		<header>
 			    <h1 th:text=" ${article.titre}"></h1>
-			     <span th:text="'Date: ' + ${article.date}"></span>
+			    <span th:text="${article.date}"></span>
 			 </header>   
 			 <section>
 			     <p th:text="' ' + ${article.contenu}" />
 			 </section>
-			 Tags:
-			 <span th:each="tag:${article.tags}">
-     			<span th:text="${tag.contenu}">
-     			</span>
-     		</span>
+			 <footer>
+				 Tags:
+				 <span th:each="tag:${article.tags}">
+	     			<span th:text="${tag.contenu}">
+	     			</span>
+	     		</span>
+     		</footer>
 			 <section>
-	    		<section class="commentaires" th:each="commentaire: ${article.commentaires}">
-	    			<header>
-			    		<span th:text="'Auteur : ' + ${commentaire.auteur.login}"></span>
-				     	<span th:text="'le: ' + ${commentaire.date}"> </span>
-	    			</header>
-	    			<section th:text="' ' + ${commentaire.contenu}">
+	    		<section  th:each="commentaire: ${article.commentaires}">
+			    	<section class="commentaires">
+			    		<span th:text=" ${commentaire.auteur.login}"></span>
+	    				<section th:text="${commentaire.contenu}"></section>
+						<span class="dateCommentaire" th:text="'le: ' + ${commentaire.date}"> </span>
 	    			</section>
 		     	</section>
 			    <form action="#" th:action="@{ajouterCommentaire}"  method="post">
 			  		<section class="posteCommentaire">
+				  		<span th:text="${sessionBean.user.login}+':'"></span>
 				         <input type="text" name="contenuCommentaire" />
 				         <!--   <textarea name="contenuCommentaire"> </textarea> -->
 				        <input type="submit" value="Publier" />
@@ -67,14 +74,14 @@
     		</section>
     	</article>
     	<section class="actionSuivanteArticle">
-    		<a href="articles/ajouterArticle">Ajouter article</a>
+    		<a href="#" th:href="@{ajouterArticle}">Ajouter article</a>
 			<a href="/">Accueil</a>
     	</section>
-    	<img class="boule2" src="boule2.png" />
+    	<img class="boule2" src="../boule2.png" />
     </section>
         
     <div class="houx">
-    	<img src="houx.png" />
+    	<img src="../houx.png" />
     </div> 
    
 </body>

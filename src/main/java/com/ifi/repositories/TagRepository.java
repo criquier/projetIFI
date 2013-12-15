@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import com.ifi.model.Tag;
 @Repository
 @Transactional
 public class TagRepository {
-    @PersistenceContext
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager entityManager;
    
    // Trouver un article à travers son id
