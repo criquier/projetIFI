@@ -70,7 +70,7 @@ public class ArticleRepository {
 	public List<Article > findByTag(String tag)
         {
                 Query query = this.entityManager.createQuery("SELECT a FROM Article a LEFT JOIN a.tags t"+ 
-                "WHERE (t.contenu=?)");
+                " WHERE (t.contenu=?)");
                 query.setParameter(1, tag);
                 return query.getResultList();
                 
@@ -80,7 +80,7 @@ public class ArticleRepository {
 	public List<Article > findByAuteur(String name)
         {
                 Query query = this.entityManager.createQuery("SELECT a FROM Article a LEFT JOIN a.auteur u"+ 
-                "WHERE (u.login=?)");
+                " WHERE (u.login=?)");
                 query.setParameter(1, name);
                 return query.getResultList();
                 

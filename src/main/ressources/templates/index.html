@@ -11,13 +11,16 @@
 		<!-- Filter l'affichage -->
 		<form action="#" th:action="@{filter}"  th:object="${selector}" method="post">
 			     <label name="action">Afficher Par:</label>
-			     <select th:field="*{action}">
+			     <select th:field="*{action}" name="action">
   					<option value="Les plus recent">Les plus récents</option>
   					<option value="Auteur">Auteur</option>
-  					<option value="Tags">Tags</option>
-				</select>     
+  					<option value="Tag">Tags</option>
+				</select>  
+				
 			     <label name="filtre">Tag:</label>
+			     
 			     <select th:field="*{tag}">
+			       <option value="tous">Tous</option>
   					<option th:each="t : ${tags}" 
           			th:value="${t.contenu}" 
           			th:text="${t.contenu}">Contenu</option>

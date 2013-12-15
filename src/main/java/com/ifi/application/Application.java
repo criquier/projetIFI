@@ -55,7 +55,7 @@ public class Application {
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder().setType(H2).build();
     }
-
+   
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
