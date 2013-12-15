@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -22,12 +22,17 @@ public class Article {
   @GeneratedValue(strategy=GenerationType.AUTO)
   private long id;
   private String titre;
+  @Column(length=500000)
   private String contenu;
   private String date;
   @ManyToOne
   private User auteur;
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany
   private List<Commentaire> commentaires=new ArrayList<Commentaire>();
+  
+  @ManyToMany
+  private List<Tag> tags=new ArrayList<Tag>();
+  
    //Constructeurs
    public Article(){
       SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -37,9 +42,20 @@ public class Article {
    }
    public Article(long id,String titre, String contenu){
        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
-       this.id=id;
+      this.id=id;
        this.titre=titre;
        this.contenu=contenu;
+      Date today=new Date();
+      this.date=formater.format(today);
+
+     
+   }
+   public Article(String titre, String contenu,User auteur){
+       SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+      // this.id=id;
+       this.titre=titre;
+       this.contenu=contenu;
+       this.auteur=auteur;
       Date today=new Date();
       this.date=formater.format(today);
 
@@ -85,7 +101,12 @@ public class Article {
     public void setCommentaires(List<Commentaire> commentaires) {
         this.commentaires = commentaires;
     }
-
+    public List<Tag> getTags() {
+        return tags;
+    }
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
     
     
     

@@ -8,6 +8,27 @@
 <body>
 	<section class="barreHaut">
 		<img src="guirlande.png" />
+		<!-- Filter l'affichage -->
+		<form action="#" th:action="@{filter}"  th:object="${selector}" method="post">
+			     <label name="action">Afficher Par:</label>
+			     <select th:field="*{action}" name="action">
+  					<option value="Les plus recent">Les plus récents</option>
+  					<option value="Auteur">Auteur</option>
+  					<option value="Tag">Tags</option>
+				</select>  
+				
+			     <label name="filtre">Tag:</label>
+			     
+			     <select th:field="*{tag}">
+			       <option value="tous">Tous</option>
+  					<option th:each="t : ${tags}" 
+          			th:value="${t.contenu}" 
+          			th:text="${t.contenu}">Contenu</option>
+				</select>
+				<label name="Auteur">Auteur:</label>
+				<input type="text" th:field="*{auteur}" />  
+		         <input type="submit" value="Afficher" />
+		    </form>
     	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
 		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
     </section>
@@ -28,7 +49,7 @@
 			<ul>
 				<li><a href="/">Accueil</a></li>
 				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier mon profil</a></li> 
-				<li th:if="${sessionBean}"><a href="/ajouterArticle">Ajouter Article</a></li>
+				<li th:if="${sessionBean}"><a href="articles/ajouterArticle">Ajouter Article</a></li>
 				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
 			</ul>
 		</section>
@@ -43,7 +64,10 @@
     			<strong th:text="${article.titre}">Titre</strong><br/>
     			<span th:text="${article.date}"> Date </span>
     			Auteur <span th:text="${article.auteur.login}" >auteur</span>
-    			Tags associés : <span >Bubulle, first,noel,....</span>
+    			Tags associés : 
+    			<span th:each="tag:${article.tags}">
+    				<span th:text="${tag.contenu}"> tag </span> 
+    		   </span>
     		</header>
     		<section >
     			<p th:text="${article.contenu}">
@@ -57,5 +81,6 @@
     <div class="houx">
     	<img src="houx.png" />
     </div>
+
 </body>
 </html>

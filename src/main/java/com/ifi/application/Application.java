@@ -33,9 +33,13 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 
 import com.ifi.repositories.ArticleRepository;
 import com.ifi.repositories.CommentaireRepository;
+import com.ifi.repositories.TagRepository;
 import com.ifi.repositories.UserRepository;
 import com.ifi.utils.Utils;
 
@@ -44,13 +48,14 @@ import com.ifi.utils.Utils;
 @EnableTransactionManagement
 @EnableAutoConfiguration(exclude={HibernateJpaAutoConfiguration.class})
 @ComponentScan(basePackages="com.ifi.controller")
+
 public class Application {
 	
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder().setType(H2).build();
     }
-
+   
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
@@ -68,6 +73,7 @@ public class Application {
         hibernateJpaVendorAdapter.setDatabase(Database.H2);
         return hibernateJpaVendorAdapter;
     }
+    
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
@@ -88,48 +94,63 @@ public class Application {
     	return new CommentaireRepository();
     }
 
+    @Bean
+    public TagRepository tagRepository(){
+    	return new TagRepository();
+    }
     
-    static String mailboxDestination = "mailbox-destination";
-
-	@Bean
-	ConnectionFactory connectionFactory() {
-		return new CachingConnectionFactory(new ActiveMQConnectionFactory(
-				"tcp://localhost:61616"));
-	}
-
-	@Bean
-	MessageListenerAdapter receiver() {
-		return new MessageListenerAdapter(new Receiver()) {
-			{
-				setDefaultListenerMethod("receiveMessage");
-			}
-		};
-	}
+    //Permet de gerer la partie web service REST
+    @Bean
+    public ViewResolver getContentNegotiatingViewResolver(
+        ContentNegotiationManager manager) {
+        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+        resolver.setContentNegotiationManager(manager);
+    return resolver;
+}
+    
+   
+//    static String mailboxDestination = "mailbox-destination";
+//
+//	@Bean
+//	ConnectionFactory connectionFactory() {
+//		return new CachingConnectionFactory(new ActiveMQConnectionFactory(
+//				"tcp://localhost:61616"));
+//	}
+//
+//	@Bean
+//	MessageListenerAdapter receiver() {
+//		return new MessageListenerAdapter(new Receiver()) {
+//			{
+//				setDefaultListenerMethod("receiveMessage");
+//			}
+//		};
+//	}
+//	
+//	@Bean
+//	SimpleMessageListenerContainer container(
+//			final MessageListenerAdapter messageListener,
+//			final ConnectionFactory connectionFactory) {
+//		final Destination destination = new Topic() {
+//			
+//			@Override
+//			public String getTopicName() throws JMSException {
+//				return mailboxDestination;
+//			}
+//		};
+//		return new SimpleMessageListenerContainer() {
+//			{
+//				setMessageListener(messageListener);
+//				setConnectionFactory(connectionFactory);
+//				setDestination(destination);
+//			}
+//		};
+//	}
+//
+//	@Bean
+//	JmsTemplate jmsTemplate(ConnectionFactory connectionFactory) {
+//		return new JmsTemplate(connectionFactory);
+//	}
 	
-	@Bean
-	SimpleMessageListenerContainer container(
-			final MessageListenerAdapter messageListener,
-			final ConnectionFactory connectionFactory) {
-		final Destination destination = new Topic() {
-			
-			@Override
-			public String getTopicName() throws JMSException {
-				return mailboxDestination;
-			}
-		};
-		return new SimpleMessageListenerContainer() {
-			{
-				setMessageListener(messageListener);
-				setConnectionFactory(connectionFactory);
-				setDestination(destination);
-			}
-		};
-	}
-
-	@Bean
-	JmsTemplate jmsTemplate(ConnectionFactory connectionFactory) {
-		return new JmsTemplate(connectionFactory);
-	}
     public static void main(String[] args) {
        // AbstractApplicationContext context = new AnnotationConfigApplicationContext(Application.class,args);
     	// SpringApplication.run(Application.class, args);
@@ -137,28 +158,30 @@ public class Application {
     	 ApplicationContext context = SpringApplication.run(Application.class, args);
     	 Utils.fillDataBase(context);
        
-    	 MessageCreator messageCreator = new MessageCreator() {
- 			@Override
- 			public Message createMessage(Session session) throws JMSException {
- 				return session.createTextMessage("Ping par Maxime");
- 			}
- 		};
- 		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
- 		
- 		
- 		//// A ajouter pour la version topic
- 		final Destination destination = new Topic() {
- 			
- 			@Override
- 			public String getTopicName() throws JMSException {
- 				return mailboxDestination;
- 			}
- 		};
- 		////
- 		System.out.println("-------------------Envoi du message envoyé par Jms -----------------");
- 		jmsTemplate.send(destination, messageCreator);
+
+//    	 MessageCreator messageCreator = new MessageCreator() {
+// 			@Override
+// 			public Message createMessage(Session session) throws JMSException {
+// 				return session.createTextMessage("Ping par Maxime");
+// 			}
+// 		};
+// 		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
+// 		
+// 		
+// 		//// A ajouter pour la version topic
+// 		final Destination destination = new Topic() {
+// 			
+// 			@Override
+// 			public String getTopicName() throws JMSException {
+// 				return mailboxDestination;
+// 			}
+// 		};
+// 		////
+// 		System.out.println("-------------------Envoi du message envoyé par Jms -----------------");
+// 		jmsTemplate.send(destination, messageCreator);
  		
     	 /****** N'OUBLIEZ PAS DE LANCER LE SERVEUR ACTIVEMQ !!!! cd apache-activemq/bin/linuxx86-32(ou64bit) puis ./activemq start **/
+
 
         //context.close();
     }
