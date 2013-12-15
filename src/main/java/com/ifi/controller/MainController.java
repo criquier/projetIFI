@@ -3,13 +3,21 @@ package com.ifi.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.jms.Topic;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ifi.application.Application;
 import com.ifi.model.Article;
 import com.ifi.model.Tag;
 import com.ifi.model.User;
@@ -30,6 +38,8 @@ public class MainController {
     TagRepository tagRepository;
     @Autowired
     SessionBean sessionBean;
+    @Autowired
+    JmsTemplate jmsTemplate;
     
     @RequestMapping(value="/", method=RequestMethod.GET)
 	public String index( Model model)
@@ -47,6 +57,15 @@ public class MainController {
 	     model.addAttribute("tags",tags);
 	     model.addAttribute("selector",selector);
 	     model.addAttribute("users",users);
+	     
+	     jmsTemplate.send(new MessageCreator() {
+			
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				return session.createTextMessage("----Chargement de l'accueil du site depuis l'ordi fixe ----");
+			}
+		});
+	     
 	     
 	     if(sessionBean.isConnected())
 	    	 model.addAttribute("sessionBean",sessionBean);

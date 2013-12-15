@@ -3,7 +3,13 @@ package com.ifi.controller;
 
 import java.util.List;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
 import com.ifi.model.Article;
 import com.ifi.model.Commentaire;
 import com.ifi.model.Tag;
@@ -32,6 +39,8 @@ public class ArticleController {
     private Article article;
     @Autowired
     SessionBean sessionBean;
+    @Autowired
+    JmsTemplate jmsTemplate;
     
     
     
@@ -74,6 +83,17 @@ public class ArticleController {
          }
          
          repository.save(article);
+         /*** envoi aux autre ordi **/
+         Gson gson = new Gson();
+         //final String json = gson.toJson(article);
+         jmsTemplate.send(new MessageCreator() {
+			
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				// TODO Auto-generated method stub
+				return session.createTextMessage("Creation Article");
+			}
+		});
         // System.out.println("TAGS: "+article.getTags().size());
         
         
