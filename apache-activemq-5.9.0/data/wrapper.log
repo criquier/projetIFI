@@ -199,3 +199,11 @@ INFO   | jvm 1    | 2013/12/15 14:30:57 | 	at sun.reflect.DelegatingMethodAccess
 INFO   | jvm 1    | 2013/12/15 14:30:57 | 	at java.lang.reflect.Method.invoke(Method.java:606)
 INFO   | jvm 1    | 2013/12/15 14:30:57 | 	at org.tanukisoftware.wrapper.WrapperSimpleApp.run(WrapperSimpleApp.java:240)
 INFO   | jvm 1    | 2013/12/15 14:30:57 | 	at java.lang.Thread.run(Thread.java:724)
+INFO   | jvm 1    | 2013/12/15 15:32:26 |  INFO | Database ../../data/kahadb/lock is locked... waiting 10 seconds for the database to be unlocked. Reason: java.io.IOException: File '../../data/kahadb/lock' could not be locked.
+INFO   | jvm 1    | 2013/12/15 15:32:36 |  INFO | Database ../../data/kahadb/lock is locked... waiting 10 seconds for the database to be unlocked. Reason: java.io.IOException: File '../../data/kahadb/lock' could not be locked.
+INFO   | jvm 1    | 2013/12/15 15:32:46 |  INFO | Database ../../data/kahadb/lock is locked... waiting 10 seconds for the database to be unlocked. Reason: java.io.IOException: File '../../data/kahadb/lock' could not be locked.
+INFO   | jvm 1    | 2013/12/15 15:32:56 |  INFO | Database ../../data/kahadb/lock is locked... waiting 10 seconds for the database to be unlocked. Reason: java.io.IOException: File '../../data/kahadb/lock' could not be locked.
+INFO   | jvm 1    | 2013/12/15 15:33:06 |  INFO | Database ../../data/kahadb/lock is locked... waiting 10 seconds for the database to be unlocked. Reason: java.io.IOException: File '../../data/kahadb/lock' could not be locked.
+INFO   | jvm 1    | 2013/12/15 15:33:16 |  INFO | Database ../../data/kahadb/lock is locked... waiting 10 seconds for the database to be unlocked. Reason: java.io.IOException: File '../../data/kahadb/lock' could not be locked.
+INFO   | jvm 1    | 2013/12/15 15:33:26 |  INFO | Database ../../data/kahadb/lock is locked... waiting 10 seconds for the database to be unlocked. Reason: java.io.IOException: File '../../data/kahadb/lock' could not be locked.
+INFO   | jvm 1    | 2013/12/15 15:33:36 |  INFO | Database ../../data/kahadb/lock is locked... waiting 10 seconds for the database to be unlocked. Reason: java.io.IOException: File '../../data/kahadb/lock' could not be locked.
