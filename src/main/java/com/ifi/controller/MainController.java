@@ -58,13 +58,6 @@ public class MainController {
 	     model.addAttribute("selector",selector);
 	     model.addAttribute("users",users);
 	     
-	     jmsTemplate.send(new MessageCreator() {
-			
-			@Override
-			public Message createMessage(Session session) throws JMSException {
-				return session.createTextMessage("----Chargement de l'accueil du site depuis l'ordi fixe ----");
-			}
-		});
 	     
 	     
 	     if(sessionBean.isConnected())

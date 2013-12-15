@@ -41,6 +41,7 @@ import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 
+import com.google.gson.Gson;
 import com.ifi.repositories.ArticleRepository;
 import com.ifi.repositories.CommentaireRepository;
 import com.ifi.repositories.TagRepository;
@@ -186,19 +187,12 @@ public class Application {
 		 * Objet MessageCreator qui va envoyer le msg - ICI a remplacer par un
 		 * JSON
 		 **/
-		MessageCreator messageCreator = new MessageCreator() {
-			@Override
-			public Message createMessage(Session session) throws JMSException {
-				return session
-						.createTextMessage("--------------Ping par "+System.getProperty("user.name"));
-			}
-		};
+
 
 		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 		jmsTemplate.setDefaultDestination(destination);
 		MessageListenerAdapter msg = context.getBean(MessageListenerAdapter.class);
-		System.out.println("---------------Envoi du message JMS");
-		jmsTemplate.send(messageCreator);
+		System.out.println("---------------Reception des messages JMS");
 		
 		/******
 		 * N'OUBLIEZ PAS DE LANCER LE SERVEUR ACTIVEMQ !!!! cd

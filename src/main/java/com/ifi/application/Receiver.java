@@ -33,8 +33,12 @@ public class Receiver {
     public void receiveMessage(String message) {
         System.out.println("------------------------------ Message recu dans le Receive <" + message + ">");
        // context.close();
-        //Article a = gson.fromJson(message, Article.class);
-        //articleRepository.save(a);
+        Article a = gson.fromJson(message, Article.class);
+        if(a instanceof Article){
+        	System.out.println("--- Instance d'Article recu----");
+        	System.out.println("Description article.toString : "+a.toString());
+        		articleRepository.save(a);
+        }
         FileSystemUtils.deleteRecursively(new File("activemq-data"));
     }
 }

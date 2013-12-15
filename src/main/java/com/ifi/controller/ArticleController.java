@@ -85,13 +85,13 @@ public class ArticleController {
          repository.save(article);
          /*** envoi aux autre ordi **/
          Gson gson = new Gson();
-         //final String json = gson.toJson(article);
+         final String json = gson.toJson(article);
          jmsTemplate.send(new MessageCreator() {
 			
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				// TODO Auto-generated method stub
-				return session.createTextMessage("Creation Article");
+				return session.createTextMessage(json);
 			}
 		});
         // System.out.println("TAGS: "+article.getTags().size());
