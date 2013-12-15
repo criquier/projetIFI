@@ -1,14 +1,54 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Inscription validé</title> 
+    <title>Inscription validée</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <link rel="stylesheet" href="mainstyle.css" media="all"/>  
+    
 </head>
 <body>
-	<h1>Vous etes correctement inscrit, vous un rapel de vos identifiants</h1>
-    <p th:text="'Login : ' + ${user.loggin}" />
-    <p th:text="'Mot de passe ' + ${user.password}" />
- 	<p><a href="/">Revenir à l'accueil</a></p>
+	<section class="barreHaut">
+		<img src="guirlande.png" />
+    	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
+		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
+	</section>
+	<div class="bonnet">
+		<img src="bonnet.png" />
+	</div>
+	<section class="menu">
+		<section class="avatar">
+			<img src="avatar.jpeg" />
+		</section>
+		<section class="listMenu">
+		<p 	
+			th:if="${sessionBean}"
+			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
+				<li th:if="${sessionBean}"><a href="/ajouterArticle">Ajouter Article</a></li>
+				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
+			</ul>
+		</section>
+	</section>
+	<section class="corps">
+    	<header>
+			<h1>Vous êtes correctement inscrit, un rapel de vos identifiants</h1>
+    	</header>
+    	<article class="article">
+    		<section >
+    			 <p th:text="'Login : ' + ${user.login}" />
+			    <p th:text="'Mot de passe ' + ${user.password}" />
+			 	<p><a href="/">Revenir à l'accueil</a></p>
+    		</section>
+    	</article>
+    	<img class="boule2" src="boule2.png" />
+    </section>
+        
+    <div class="houx">
+    	<img src="houx.png" />
+    </div>
+   
    
     
 </body>

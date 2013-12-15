@@ -3,48 +3,81 @@
 <head> 
     <title>Accueil du Blog</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      
+    <link rel="stylesheet" href="mainstyle.css" media="all"/>  
 </head>
 <body>
-	<h1>Bienvenue sur notre blog</h1>
-	<p><a href="/">Acceuil</a></p>
-	<p><a href="/articles/ajouterArticle">Ajouter un autre Article</a></p>
-	<p><a href="/inscription">S'incrire</a></p>
-	<div th:if="${userconnecter}"> 
-	   <p th:text="'Bienvenue ' + ${userconnecter.loggin}">userconnecter</p><a href="/user/profil">Modifier son profil</a></div>
-	<p th:unless="${userconnecter}"><a href="/connexion">Se connecter</a></p>
+	<section class="barreHaut">
+		<img src="guirlande.png" />
+		<!-- Filter l'affichage -->
+		<form action="#" th:action="@{filter}"  th:object="${selector}" method="post">
+			     <label name="action">Afficher Par:</label>
+			     <select th:field="*{action}">
+  					<option value="Les plus recent">Les plus récents</option>
+  					<option value="Auteur">Auteur</option>
+  					<option value="Tags">Tags</option>
+				</select>     
+			     <label name="filtre">Tag:</label>
+			     <select th:field="*{tag}">
+  					<option th:each="t : ${tags}" 
+          			th:value="${t.contenu}" 
+          			th:text="${t.contenu}">Contenu</option>
+				</select>
+				<label name="Auteur">Auteur:</label>
+				<input type="text" th:field="*{auteur}" />  
+		         <input type="submit" value="Afficher" />
+		    </form>
+    	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
+		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
+    </section>
+	<div class="bonnet">
+		<img src="bonnet.png" />
+	</div>
+	<section class="menu">
+		<section>
+			<img class="cadre" src="cadre.png" />
+			<img class="avatar" src="avatar.jpeg" />
+		</section>
+		<section class="listMenu">
+			<img class="cadreBienvenue" src="cadreBienvenue.png" />
+			<section class="contenuCadre">
+				<span class="bonjourX" th:if="${sessionBean}" th:text="'Bienvenue ' + ${sessionBean.user.login}"></span>
+				<span class="bonjourX" th:unless="${sessionBean}" th:text="'Bienvenue sur le site de blog'"></span>
+			</section>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier mon profil</a></li> 
+				<li th:if="${sessionBean}"><a href="articles/ajouterArticle">Ajouter Article</a></li>
+				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
+			</ul>
+		</section>
+	</section>
 	
-    <p th:if="${message_error}" th:text="${message_error}"></p>
-    <table border="1">
-    <caption>liste des Articles sur le Site</caption>
-    	<tr>
-    		<th>Titre</th>
-    		<th>Date de publication</th>
-			<!--  <th>Contenu</th> -->
-			<th>Lire</th>
-			</tr><tr th:each="article: ${listarticles}">
-			<td th:text="${article.titre}">titre</td>
-			<td th:text="${article.date}">date</td>
-			<!--  <td th:text="${article.contenu}">contenu</td>-->
-			<td>
-			<a href="articles/articleTemplate.html" th:href="@{'/articles/'+ ${article.id}}">lire article</a>
-			</td>
-		</tr>
-	</table>
-	
-	
-	<table border="1">
-	   <caption>liste des utilisateurs</caption>
-    	<tr>
-    		<th>Id</th>
-    		<th>Login</th>
-			<th>Mot de passe</th>
-			</tr><tr th:each="user: ${users}">
-			<td th:text="${user.id}">id</td>
-			<td><a href ="userTemplate.html" th:href="@{/user/profil(id=${user.id})}"><span th:text="${user.loggin}"></span></a></td>
-			<td th:text="${user.password}">Mot de passe</td>
-		</tr>
-	</table>
-    
+ <section class="corps">
+    	<header>
+	    	<h1>Bienvenue sur notre blog</h1>
+    	</header>
+    	<article class="article" th:each="article: ${articles}">
+    		<header>
+    			<strong th:text="${article.titre}">Titre</strong><br/>
+    			<span th:text="${article.date}"> Date </span>
+    			Auteur <span th:text="${article.auteur.login}" >auteur</span>
+    			Tags associés : 
+    			<span th:each="tag:${article.tags}">
+    				<span th:text="${tag.contenu}"> tag </span> 
+    		   </span>
+    		</header>
+    		<section >
+    			<p th:text="${article.contenu}">
+    				contenu
+    			</p>
+    		</section>
+    	</article>
+    	<img class="boule2" src="boule2.png" />
+    </section>
+        
+    <div class="houx">
+    	<img src="houx.png" />
+    </div>
+
 </body>
 </html>

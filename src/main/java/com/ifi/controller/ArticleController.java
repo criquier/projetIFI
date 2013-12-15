@@ -23,28 +23,44 @@ import com.ifi.repositories.TagRepository;
 @Controller
 @RequestMapping("/articles")
 public class ArticleController {
+
    @Autowired
     private TagRepository tagRepository;
-       @Autowired
-       private CommentaireRepository comRepository;
-        @Autowired
-	private ArticleRepository repository;
-        private Article article;
+   @Autowired
+    private CommentaireRepository comRepository;
+   @Autowired
+    private ArticleRepository repository;
+    private Article article;
+    @Autowired
+    SessionBean sessionBean;
+    
     
     
     //intercepte les ajouts d'article
     @RequestMapping(value="/ajouterArticle", method=RequestMethod.GET)
     public String ajouterArticleFormulaire(Model model){
+    	if(sessionBean.getUser() == null)
+			return "redirect:/";
+		
 	// On l'ajoute dans la BD locale
+    model.addAttribute("sessionBean", sessionBean);
 	model.addAttribute("article", new Article());
 	model.addAttribute("TAGS", this.tagRepository.findAll());
 	return "articles/article";
     }
     
     @RequestMapping(value="/ajouterArticle", method=RequestMethod.POST)
+
     public String ajouterArticleAfficher(@ModelAttribute Article article,
 	    @RequestParam("checked") List<String> checked,Model model) {
+    	if(sessionBean.getUser() == null)
+	  return "redirect:/";
+		
+    	 article.setAuteur(sessionBean.getUser());
          model.addAttribute("article", article);
+         model.addAttribute("sessionBean", sessionBean);
+	
+	model.addAttribute("article", article);
          //System.out.println("ID: " +checked.size());
          Tag tag=new Tag();
          for(int i=0;i<checked.size();i++){
@@ -52,13 +68,12 @@ public class ArticleController {
         	 tag=new Tag(checked.get(i));
         	 tagRepository.save(tag);
              }else{
-        	// System.out.println("*************************"+tagRepository.findByContenu(checked.get(i)).getId());
-        	 
         	 tag=tagRepository.findByContenu(checked.get(i)); 
              }
              article.getTags().add(tag);
              
          }
+         
          repository.save(article);
         // System.out.println("TAGS: "+article.getTags().size());
         
@@ -76,15 +91,20 @@ public class ArticleController {
     //intercepte la suppression de l'article
     @RequestMapping("/supprimerArticle")
     public void supprimerArticle(@RequestParam(value="id", required=true) long id){
-	repository.delete(id);
+    	if(sessionBean.getUser() != null)
+    		repository.delete(id);
 	
     }
     //intercepte la consultation de l'article
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String consulterArticle(@PathVariable String id,
 	    Model model){
+
 	this.article=repository.findById(Long.parseLong(id));
 	 System.out.println("ARTICLE:"+this.article.getTitre());
+    	if(sessionBean.getUser() == null)
+			return "redirect:/";
+
 	model.addAttribute("article",this.article);
 	//model.addAttribute("tags",this.article.getTags());
        // model.addAttribute("commentaires",this.article.getCommentaires());
@@ -96,17 +116,21 @@ public class ArticleController {
     @RequestMapping(value="/ajouterCommentaire", method=RequestMethod.POST)
     public String ajouterCommentaire(@RequestParam("contenuCommentaire") String commentaire,
 	    Model model) {
-	
+    	if(sessionBean.getUser() == null)
+			return "redirect:/";
+		
          // on ajoute le commentaire de l'article
 	Commentaire c=new Commentaire();
+	c.setAuteur(sessionBean.getUser());
 	c.setContenu(commentaire);
 	comRepository.save(c);
 
         this.article.getCommentaires().add(c);
         model.addAttribute("article",this.article);
-        model.addAttribute("commentaires",this.article.getCommentaires());
-         
+        model.addAttribute("sessionBean", sessionBean);
+
         repository.update(this.article);
+
         return "articles/articleTemplate";
         //return "redirect:/consulterArticle?id="+article.getId();
     }

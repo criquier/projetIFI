@@ -59,9 +59,38 @@ public class ArticleRepository {
             entityManager.flush();
         }
         // Récupérer la liste de tous les articles
-        public List<Article> findAll()
+        @SuppressWarnings("unchecked")
+	public List<Article> findAll()
         {
-                Query query= this.entityManager.createQuery("select a from Article a");
+                Query query= this.entityManager.createQuery("select a from Article a order by a.date desc");
+                return query.getResultList();
+        }
+        // Recupère les articles par Tag
+        @SuppressWarnings("unchecked")
+	public List<Article > findByTag(String tag)
+        {
+                Query query = this.entityManager.createQuery("SELECT a FROM Article a LEFT JOIN a.tags t"+ 
+                "WHERE (t.contenu=?)");
+                query.setParameter(1, tag);
+                return query.getResultList();
+                
+        }
+        //Recuperer les articles par Auteur
+        @SuppressWarnings("unchecked")
+	public List<Article > findByAuteur(String name)
+        {
+                Query query = this.entityManager.createQuery("SELECT a FROM Article a LEFT JOIN a.auteur u"+ 
+                "WHERE (u.login=?)");
+                query.setParameter(1, name);
+                return query.getResultList();
+                
+        }
+        
+     // Récupérer la liste des 10 articles les plus recents
+        @SuppressWarnings("unchecked")
+	public List<Article> findMostRecent()
+        {
+                Query query= this.entityManager.createQuery("select a from Article a order by a.date desc").setMaxResults(10);
                 return query.getResultList();
         }
         // Supprimer un article

@@ -18,22 +18,22 @@ import com.ifi.model.User;
 		@PersistenceContext
 		private EntityManager entityManager;
 		
-		public User findByLoggin(String loggin)
+		public User findByLogin(String login)
 		{
 			User user = null;
 			try {
-				Query query = this.entityManager.createQuery("select u from User u where u.loggin=?");
-				query.setParameter(1, loggin);
+				Query query = this.entityManager.createQuery("select u from User u where u.login=?");
+				query.setParameter(1, login);
 				user = (User) query.getSingleResult(); 	
 			} catch (Exception e) {
-				System.out.println("User findByLoggin------------- User non trouve -------------");
+				System.out.println("User findByLogin------------- User non trouve -------------");
 			}
 			return user;
 		}
 		
-		public boolean existUser(String loggin){
+		public boolean existUser(String login){
 			try {
-				if(findByLoggin(loggin) != null){
+				if(findByLogin(login) != null){
 					System.out.println("public boolean existUser------------- User existe  -------------");
 					return true;
 				}
@@ -49,6 +49,7 @@ import com.ifi.model.User;
 			this.entityManager.persist(user);
 		}
 		
+		@SuppressWarnings("unchecked")
 		public List<User> findAll()
 		{
 			Query query= this.entityManager.createQuery("select u from User u");
@@ -72,15 +73,23 @@ import com.ifi.model.User;
 		
 	    public boolean update(User user){
 	    	
-	    	try {
-	    	   User u= findOne(user.getId());
-	 	       u.setLoggin(user.getLoggin());
-	 	       u.setPassword(user.getPassword());
-	 	       this.entityManager.getTransaction().commit();
+//	    	try {
+//	    		System.out.println("---------------------------- 1");
+//	    	   User u= findOne(user.getId());
+//	    	   System.out.println("---------------------------- 2");
+//	 	       u.setLogin(user.getLogin());
+//	 	      System.out.println("---------------------------- 3");
+//	 	       u.setPassword(user.getPassword());
+//	 	      System.out.println("---------------------------- 4");
+	 	       entityManager.merge(user);
 	 	       return true;
-			} catch (Exception e) {
-				return false;
-			}
+//	 	      System.out.println("---------------------------- 5");
+	 	      // System.out.println("update Verification apres mise à jour-----------------  User : "+findOne(user.getId()).toString());
+//	 	       return true;
+//			} catch (Exception e) {
+//				System.out.println("update-----------------  Erreur lors de la  modification");
+//				return false;
+//			}
 	    }
 	   
 	    public void delete(long id){

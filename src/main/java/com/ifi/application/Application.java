@@ -2,9 +2,16 @@ package com.ifi.application;
 
 import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.H2;
 
+import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.jms.Topic;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
@@ -14,6 +21,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jms.connection.CachingConnectionFactory;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
+import org.springframework.jms.listener.SimpleMessageListenerContainer;
+import org.springframework.jms.listener.adapter.MessageListenerAdapter;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -38,7 +50,7 @@ import com.ifi.utils.Utils;
 @ComponentScan(basePackages="com.ifi.controller")
 
 public class Application {
-    
+	
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder().setType(H2).build();
@@ -81,8 +93,7 @@ public class Application {
     public CommentaireRepository commentaireRepository(){
     	return new CommentaireRepository();
     }
- 
-    
+
     @Bean
     public TagRepository tagRepository(){
     	return new TagRepository();
@@ -97,14 +108,78 @@ public class Application {
     return resolver;
 }
     
-    
+   
+//    static String mailboxDestination = "mailbox-destination";
+//
+//	@Bean
+//	ConnectionFactory connectionFactory() {
+//		return new CachingConnectionFactory(new ActiveMQConnectionFactory(
+//				"tcp://localhost:61616"));
+//	}
+//
+//	@Bean
+//	MessageListenerAdapter receiver() {
+//		return new MessageListenerAdapter(new Receiver()) {
+//			{
+//				setDefaultListenerMethod("receiveMessage");
+//			}
+//		};
+//	}
+//	
+//	@Bean
+//	SimpleMessageListenerContainer container(
+//			final MessageListenerAdapter messageListener,
+//			final ConnectionFactory connectionFactory) {
+//		final Destination destination = new Topic() {
+//			
+//			@Override
+//			public String getTopicName() throws JMSException {
+//				return mailboxDestination;
+//			}
+//		};
+//		return new SimpleMessageListenerContainer() {
+//			{
+//				setMessageListener(messageListener);
+//				setConnectionFactory(connectionFactory);
+//				setDestination(destination);
+//			}
+//		};
+//	}
+//
+//	@Bean
+//	JmsTemplate jmsTemplate(ConnectionFactory connectionFactory) {
+//		return new JmsTemplate(connectionFactory);
+//	}
+	
     public static void main(String[] args) {
        // AbstractApplicationContext context = new AnnotationConfigApplicationContext(Application.class,args);
     	// SpringApplication.run(Application.class, args);
-    	 System.out.println("--------------Thierno saidou-------------------");
+    	
     	 ApplicationContext context = SpringApplication.run(Application.class, args);
     	 Utils.fillDataBase(context);
        
+//    	 MessageCreator messageCreator = new MessageCreator() {
+// 			@Override
+// 			public Message createMessage(Session session) throws JMSException {
+// 				return session.createTextMessage("Ping par Maxime");
+// 			}
+// 		};
+// 		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
+// 		
+// 		
+// 		//// A ajouter pour la version topic
+// 		final Destination destination = new Topic() {
+// 			
+// 			@Override
+// 			public String getTopicName() throws JMSException {
+// 				return mailboxDestination;
+// 			}
+// 		};
+// 		////
+// 		System.out.println("-------------------Envoi du message envoyé par Jms -----------------");
+// 		jmsTemplate.send(destination, messageCreator);
+// 		
+    	 
 
         //context.close();
     }

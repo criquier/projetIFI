@@ -3,36 +3,79 @@
 <head> 
     <title>Article</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="mainstyle.css" media="all"/>  
+    
 </head>
 <body>
-	<h1>Affiche Article</h1>
-    <!--  <p th:text="'id: ' + ${article.id}" />  -->
-    <p th:text="'Titre: ' + ${article.titre}" />
-     <p th:text="'Contenu: ' + ${article.contenu}" />
-     <p th:text="'Date: ' + ${article.date}" />
-     tags :
-     <span th:each="tag:${article.tags}">
-     	<span th:text="${tag.contenu}">
-     	</span>
-     </span>
-     <p><a href="articles/ajouterArticle.html" th:href="@{ajouterArticle}">ajouter article</a></p>
-    <!--<p><a href="articles/ajouterArticle">ajouter article</a></p>-->
-     <p><a href="/">Index</a></p>
-     
-     <h5>Liste des commentaires de cet article</h5>
-    
-     	<p th:each="commentaire:${article.commentaires}">
-     	  <span th:text="'Date de Publication: ' + ${commentaire.date}"> </span>
-     	  <p th:text="'Contenu: ' + ${commentaire.contenu}"> </p>
-     	</p> 
-    <h5>Commenter cet article</h5>
-    <form action="#" th:action="@{ajouterCommentaire}"  method="post">
-         <p>Contenu:</p>
-         <input type="text" name="contenuCommentaire" />
-         <!--   <textarea name="contenuCommentaire"> </textarea> -->
-        <p><input type="submit" value="Publier" /></p>
-    </form>
-    
+<section class="barreHaut">
+		<img src="guirlande.png" />
+    	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
+		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
+	</section>
+	<div class="bonnet">
+		<img src="bonnet.png" />
+	</div>
+	<section class="menu">
+		<section class="avatar">
+			<img src="avatar.jpeg" />
+		</section>
+		<section class="listMenu">
+		<p 	
+			th:if="${sessionBean}"
+			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
+				<li th:if="${sessionBean}"><a href="articles/ajouterArticle">Ajouter Article</a></li>
+				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
+			</ul>
+		</section>
+	</section>
+	<section class="corps">
+    	<header>
+			<h1></h1>
+    	</header>
+    	<article class="article">
+    		<header>
+			    <h1 th:text=" ${article.titre}"></h1>
+			     <span th:text="'Date: ' + ${article.date}"></span>
+			 </header>   
+			 <section>
+			     <p th:text="' ' + ${article.contenu}" />
+			 </section>
+			 Tags:
+			 <span th:each="tag:${article.tags}">
+     			<span th:text="${tag.contenu}">
+     			</span>
+     		</span>
+			 <section>
+	    		<section class="commentaires" th:each="commentaire: ${article.commentaires}">
+	    			<header>
+			    		<span th:text="'Auteur : ' + ${commentaire.auteur.login}"></span>
+				     	<span th:text="'le: ' + ${commentaire.date}"> </span>
+	    			</header>
+	    			<section th:text="' ' + ${commentaire.contenu}">
+	    			</section>
+		     	</section>
+			    <form action="#" th:action="@{ajouterCommentaire}"  method="post">
+			  		<section class="posteCommentaire">
+				         <input type="text" name="contenuCommentaire" />
+				         <!--   <textarea name="contenuCommentaire"> </textarea> -->
+				        <input type="submit" value="Publier" />
+			        </section>
+			    </form>
+    		</section>
+    	</article>
+    	<section class="actionSuivanteArticle">
+    		<a href="articles/ajouterArticle">Ajouter article</a>
+			<a href="/">Accueil</a>
+    	</section>
+    	<img class="boule2" src="boule2.png" />
+    </section>
+        
+    <div class="houx">
+    	<img src="houx.png" />
+    </div> 
    
 </body>
 </html>

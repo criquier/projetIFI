@@ -16,6 +16,7 @@ public class Utils {
 	public static void fillDataBase(ApplicationContext context){
 		
 		// creation des utilisateur 
+
         	  UserRepository repository = context.getBean(UserRepository.class);
           	  repository.save(new User("thierno", "Barry"));
           	  repository.save(new User("maxime", "Gens"));
@@ -25,15 +26,16 @@ public class Utils {
             System.out.println("Customers found with findAll():");
             System.out.println("-------------------------------");
             for (User user : users) {
-                System.out.println(user.getId()+" "+user.getLoggin()+" "+user.getPassword());
+                System.out.println(user.getId()+" "+user.getLogin()+" "+user.getPassword());
             }
             System.out.println();
     		TagRepository tagRepository = context.getBean(TagRepository.class);
-    		tagRepository.save(new Tag("Noël"));	
+    		tagRepository.save(new Tag("Noel"));	
     		tagRepository.save(new Tag("Neige"));
     		tagRepository.save(new Tag("Spring"));	
-    		tagRepository.save(new Tag("Fête"));	
+    		tagRepository.save(new Tag("Fete"));	
     		tagRepository.save(new Tag("Cadeau"));	
+
 	}
 	
 

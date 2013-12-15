@@ -44,9 +44,10 @@ public class TagRepository {
         entityManager.merge(tag);
     }
     // Récupérer la liste de tous les articles
+    @SuppressWarnings("unchecked")
     public List<Tag> findAll()
     {
-            Query query= this.entityManager.createQuery("select DISTINCT t from Tag t");
+            Query query= this.entityManager.createQuery("select t from Tag t");
             return query.getResultList();
     }
     // Supprimer un article

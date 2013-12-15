@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Profil de l'utilisateur</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="mainstyle.css" media="all"/>  
+</head>
+<body>
+<section class="barreHaut">
+		<img src="guirlande.png" />
+    	<a th:if="${sessionBean}" href="/deconnexion">Se déconnecter</a>
+		<a th:unless="${sessionBean}" href="/connexion">Se connecter</a>
+	</section>
+	<div class="bonnet">
+		<img src="bonnet.png" />
+	</div>
+	<section class="menu">
+		<section class="avatar">
+			<img src="avatar.jpeg" />
+		</section>
+		<section class="listMenu">
+		<p 	
+			th:if="${sessionBean}"
+			th:text="'Bienvenue ' + ${sessionBean.user.login}"></p>
+			<ul>
+				<li><a href="/">Accueil</a></li>
+				<li th:if="${sessionBean}"><a href="/user/profil" th:href="@{/user/profil(id=${sessionBean.user.id})}">Modifier son profil</a></li> 
+				<li th:if="${sessionBean}"><a href="/ajouterArticle">Ajouter Article</a></li>
+				<li th:unless="${sessionBean}"><a href="/inscription">S'incrire</a></li>
+			</ul>
+		</section>
+	</section>
+	<section class="corps">
+    	<header>
+    		<h1 th:text="'Bienvenue sur votre profil '+ ${sessionBean.user.login}">Bienvenue sur votre profil</h1>
+    	</header>
+    	<article class="article">
+    		<section >
+   		 		<h3>Vos informations</h3>
+			     <p th:text="'Login ' + ${sessionBean.user.login}" />
+			     <p th:text="'mot de passe: ' + ${sessionBean.user.password}" />
+			  
+			  	<form action="#" th:action="@{/user/profil/modifier}" th:object="${user}" method="post">
+			  		<p><input type="hidden" th:field="*{id}"/></p>
+			        <p>Login : <input type="text" th:field="*{login}" /></p>
+			        <p>Mot de passe : <input type="text" th:field="*{password}"/></p>
+			        <p><input type="submit" value="Modifier" /> <input type="reset" value="Reset" /></p>
+			    </form>
+    		</section>
+    	</article>
+    	<section class="actionSuivanteArticle" ><a href="/">Accueil</a></section>
+    	
+    	<img class="boule2" src="boule2.png" />
+    </section>
+        
+    <div class="houx">
+    	<img src="houx.png" />
+    </div>     
+</body>
+</html>
