@@ -117,9 +117,9 @@ public class Application {
 
 	@Bean
 	ConnectionFactory connectionFactory() {
-		return new CachingConnectionFactory(new ActiveMQConnectionFactory(
 		/** mettre l'adresse ip de l'ordi qui va recevoir les message **/
-		"tcp://192.168.1.96:61616"));
+		return new CachingConnectionFactory(new ActiveMQConnectionFactory(
+		"tcp://localhost:61616"));
 	}
 
 	@Bean
@@ -139,25 +139,25 @@ public class Application {
 	 * non utiliser pour la version Topic ( je suppose que c'est pour la version
 	 * Queue mais pas sur)
 	 **/
-//	@Bean
-//	SimpleMessageListenerContainer container(
-//			final MessageListenerAdapter messageListener,
-//			final ConnectionFactory connectionFactory) {
-//		final Destination destination = new Topic() {
-//			
-//			@Override
-//			public String getTopicName() throws JMSException {
-//				return mailboxDestination;
-//			}
-//		};
-//		return new SimpleMessageListenerContainer() {
-//			{
-//				setMessageListener(messageListener);
-//				setConnectionFactory(connectionFactory);
-//				setDestination(destination);
-//			}
-//		};
-//	}
+	@Bean
+	SimpleMessageListenerContainer container(
+			final MessageListenerAdapter messageListener,
+			final ConnectionFactory connectionFactory) {
+		final Destination destination = new Topic() {
+			
+			@Override
+			public String getTopicName() throws JMSException {
+				return mailboxDestination;
+			}
+		};
+		return new SimpleMessageListenerContainer() {
+			{
+				setMessageListener(messageListener);
+				setConnectionFactory(connectionFactory);
+				setDestination(destination);
+			}
+		};
+	}
 
 	@Bean
 	JmsTemplate jmsTemplate(ConnectionFactory connectionFactory) {
@@ -190,13 +190,15 @@ public class Application {
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				return session
-						.createTextMessage("Ping par Maxime depuis l'ordi fixe test");
+						.createTextMessage("--------------Ping par Maxime depuis l'ordi portable test");
 			}
 		};
 
 		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
-
-		jmsTemplate.send(destination, messageCreator);
+		jmsTemplate.setDefaultDestination(destination);
+		MessageListenerAdapter msg = context.getBean(MessageListenerAdapter.class);
+		System.out.println("---------------Envoi du message JMS");
+		jmsTemplate.send(messageCreator);
 		
 		/******
 		 * N'OUBLIEZ PAS DE LANCER LE SERVEUR ACTIVEMQ !!!! cd
