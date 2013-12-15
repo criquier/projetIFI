@@ -158,7 +158,7 @@ public class Application {
  		System.out.println("-------------------Envoi du message envoyé par Jms -----------------");
  		jmsTemplate.send(destination, messageCreator);
  		
-    	 
+    	 /****** N'OUBLIEZ PAS DE LANCER LE SERVEUR ACTIVEMQ !!!! cd apache-activemq/bin/linuxx86-32(ou64bit) puis ./activemq start **/
 
         //context.close();
     }
