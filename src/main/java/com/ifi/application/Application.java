@@ -190,7 +190,7 @@ public class Application {
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				return session
-						.createTextMessage("--------------Ping par Maxime depuis l'ordi fixe test");
+						.createTextMessage("--------------Ping par "+System.getProperty("user.name"));
 			}
 		};
 
