@@ -119,7 +119,7 @@ public class Application {
 	ConnectionFactory connectionFactory() {
 		/** mettre l'adresse ip de l'ordi qui va recevoir les message **/
 		return new CachingConnectionFactory(new ActiveMQConnectionFactory(
-		"tcp://localhost:61616"));
+		"tcp://192.168.1.96:61616"));
 	}
 
 	@Bean
@@ -190,7 +190,7 @@ public class Application {
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				return session
-						.createTextMessage("--------------Ping par Maxime depuis l'ordi portable test");
+						.createTextMessage("--------------Ping par Maxime depuis l'ordi fixe test");
 			}
 		};
 

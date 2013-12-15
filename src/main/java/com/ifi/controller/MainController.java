@@ -62,7 +62,7 @@ public class MainController {
 			
 			@Override
 			public Message createMessage(Session session) throws JMSException {
-				return session.createTextMessage("----Chargement de l'accueil du site ----");
+				return session.createTextMessage("----Chargement de l'accueil du site depuis l'ordi fixe ----");
 			}
 		});
 	     
